@@ -1,75 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Para Emi ❤️</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ead8cb">
+  <title>Invitación de boda | María & José</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-    <div class="pagina">
-
-        <h1>Para Emi ❤️</h1>
-
-        <p>
-            Tengo algo que quiero decirte...
-        </p>
-
-        <button id="boton">
-            💌 Abrir carta
-        </button>
-
-        <div id="carta" class="carta">
-
-            <h2>Para ti, Emi 💗</h2>
-
-            <p>
-                Gracias por hacerme feliz, por cada sonrisa,
-                cada momento y cada recuerdo que hemos compartido.
-            </p>
-
-            <p>
-                Sé que quizá he cometido errores y que algunas
-                veces pude haberte causado heridas que no sé cómo sanar.
-            </p>
-
-            <p>
-                No puedo cambiar lo que ya pasó, pero sí puedo
-                aprender de ello y poner todo de mi parte para
-                que no vuelva a suceder.
-            </p>
-
-            <p>
-                Quiero cuidarte, hacerte sonreír y demostrarte
-                con hechos lo importante que eres para mí.
-            </p>
-
-            <p>
-                Porque si algo tengo claro, es que quiero aprovechar
-                el tiempo que me reste de vida para hacerte feliz,
-                acompañarte y seguir creando momentos bonitos a tu lado. ❤️
-            </p>
-
-            <p>
-                No prometo ser perfecto, pero sí prometo intentar
-                ser cada día una mejor versión de mí para ti.
-            </p>
-
-            <h3>
-                Gracias por existir, Emi. 🥹❤️
-            </h3>
-
-        </div>
-
+  <main class="invitation-shell">
+    <div class="door-intro" id="doorIntro" aria-label="Abrir invitación">
+      <div class="door-panel door-left"><span class="door-ornament">❦</span></div>
+      <div class="door-panel door-right"><span class="door-ornament">❦</span></div>
+      <div class="door-center">
+        <span class="door-seal">M <i>&</i> J</span>
+        <p>UNA INVITACIÓN ESPECIAL</p>
+        <button id="openDoors" class="open-door-button">Abrir invitación <span>✧</span></button>
+      </div>
     </div>
+    <section class="page page-one active" id="pageOne" aria-label="Invitación">
+      <div class="ornate-frame">
+        <div class="corner corner-tl">❧</div><div class="corner corner-tr">❧</div>
+        <div class="corner corner-bl">❧</div><div class="corner corner-br">❧</div>
+        <p class="eyebrow">CON LA BENDICIÓN DE DIOS Y DE NUESTRAS FAMILIAS</p>
+        <div class="small-flourish">✧ ❦ ✧</div>
+        <p class="invite-line">Tenemos el honor de invitarles a celebrar</p>
+        <h1 class="names"><span>María</span><i>&</i><span>José</span></h1>
+        <p class="invite-line">el comienzo de nuestra vida juntos</p>
+        <div class="rule"><span>✦</span></div>
+        <p class="bible">“Así que ya no son dos, sino uno solo.<br>Por tanto, lo que Dios ha unido,<br>que no lo separe el hombre.”</p>
+        <p class="verse">MATEO 19:6</p>
+        <div class="address-block">
+          <p class="eyebrow">LUGAR DE CELEBRACIÓN</p>
+          <p class="address">[Escribe aquí la dirección del evento]</p>
+        </div>
+        <button class="next-button" id="nextButton">Descubrir los detalles <span>→</span></button>
+        <p class="bottom-note">UNA CELEBRACIÓN DE AMOR Y FE</p>
+      </div>
+    </section>
 
-    <script src="script.js"></script>
-
+    <section class="page page-two" id="pageTwo" aria-label="Detalles de la boda" aria-hidden="true">
+      <div class="ornate-frame details-frame">
+        <div class="corner corner-tl">❧</div><div class="corner corner-tr">❧</div>
+        <div class="corner corner-bl">❧</div><div class="corner corner-br">❧</div>
+        <p class="eyebrow">NOS ENCANTARÍA CONTAR CON SU PRESENCIA</p>
+        <div class="small-flourish">✧ ❦ ✧</div>
+        <h2 class="details-title">Nuestro día especial</h2>
+        <p class="invite-line">Celebremos juntos este momento inolvidable</p>
+        <div class="detail-card">
+          <span class="detail-label">DÍA</span>
+          <strong>[Día de la semana]</strong>
+        </div>
+        <div class="detail-card date-card">
+          <span class="detail-label">FECHA</span>
+          <strong class="date-value">[00 · MES · 20XX]</strong>
+        </div>
+        <div class="detail-card time-card">
+          <span class="detail-label">HORA</span>
+          <strong class="time-value">[00:00 p. m.]</strong>
+        </div>
+        <p class="closing">Será una alegría compartir<br>este día con ustedes.</p>
+        <div class="small-flourish">❦</div>
+        <button class="back-button" id="backButton">← Volver a la invitación</button>
+        <p class="bottom-note">MARÍA & JOSÉ · CON AMOR</p>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
 </body>
-
 </html>
