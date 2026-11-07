@@ -1,55 +1,26 @@
-const boton = document.getElementById("boton");
+const doorIntro = document.getElementById("doorIntro");
+const openDoors = document.getElementById("openDoors");
 
-const carta = document.getElementById("carta");
-
-
-boton.addEventListener("click", () => {
-
-    carta.classList.add("abierta");
-
-    boton.innerHTML = "❤️ Te quiero mucho";
-
-    crearCorazones();
-
+openDoors.addEventListener("click", () => {
+  doorIntro.classList.add("opening");
+  window.setTimeout(() => {
+    doorIntro.classList.add("gone");
+  }, 1850);
 });
 
+const pageOne = document.getElementById("pageOne");
+const pageTwo = document.getElementById("pageTwo");
 
-function crearCorazones() {
+document.getElementById("nextButton").addEventListener("click", () => {
+  pageOne.classList.remove("active");
+  pageTwo.classList.add("active");
+  pageOne.setAttribute("aria-hidden", "true");
+  pageTwo.setAttribute("aria-hidden", "false");
+});
 
-    for (let i = 0; i < 30; i++) {
-
-        setTimeout(() => {
-
-            const corazon =
-                document.createElement("div");
-
-            corazon.classList.add("corazon");
-
-            corazon.innerHTML =
-                ["❤️", "💕", "💗", "💖", "💘", "🥹"][
-                    Math.floor(Math.random() * 6)
-                ];
-
-            corazon.style.left =
-                Math.random() * 100 + "vw";
-
-            corazon.style.fontSize =
-                Math.random() * 30 + 15 + "px";
-
-            corazon.style.animationDuration =
-                Math.random() * 3 + 3 + "s";
-
-            document.body.appendChild(corazon);
-
-
-            setTimeout(() => {
-
-                corazon.remove();
-
-            }, 6000);
-
-        }, i * 100);
-
-    }
-
-}
+document.getElementById("backButton").addEventListener("click", () => {
+  pageTwo.classList.remove("active");
+  pageOne.classList.add("active");
+  pageTwo.setAttribute("aria-hidden", "true");
+  pageOne.setAttribute("aria-hidden", "false");
+});
