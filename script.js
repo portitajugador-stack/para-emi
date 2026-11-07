@@ -1,134 +1,205 @@
+// ========================================
+// INVITACIÓN DE BODA - MARÍA Y JOSÉ
+// ========================================
 
-const book = document.getElementById("book");
+const ANIO_BODA = 2026;
+const TOTAL_PAGINAS = 4;
 
-const doors = document.getElementById("doors");
+const entrada = document.getElementById("entrance");
+const invitacion = document.getElementById("invitation");
+const marcoPuerta = document.querySelector(".door-frame");
+const botonAbrir = document.getElementById("open-door");
 
-const openBtn = document.getElementById("openBtn");
+// ========================================
+// ABRIR LA PUERTA
+// ========================================
 
-const backBtn = document.getElementById("backBtn");
+botonAbrir.addEventListener("click", () => {
+  marcoPuerta.classList.add("open");
+  botonAbrir.disabled = true;
 
-const prev = document.getElementById("prev");
+  setTimeout(() => {
+    entrada.classList.add("hidden");
+    invitacion.classList.remove("hidden");
+    mostrarPagina(0);
+  }, 1900);
+});
 
-const next = document.getElementById("next");
+// ========================================
+// DESLIZAMIENTO DE PÁGINAS
+// ========================================
 
-const pageNumber = document.getElementById("pageNumber");
+const track = document.getElementById("slider-track");
+const botonesNav = document.querySelectorAll(".nav-btn");
+const botonAnterior = document.getElementById("prev-page");
+const botonSiguiente = document.getElementById("next-page");
+const numeroPagina = document.getElementById("page-number");
+const botonesContinuar = document.querySelectorAll(".next-page");
 
+let paginaActual = 0;
 
-/* CAMBIAR PÁGINA */
-
-function showPage(page) {
-
-  const details = page === 2;
-
-  book.classList.toggle(
-    "show-details",
-    details
+function mostrarPagina(numero) {
+  paginaActual = Math.max(
+    0,
+    Math.min(numero, TOTAL_PAGINAS - 1)
   );
 
-  pageNumber.textContent = details
-    ? "2 / 2"
-    : "1 / 2";
+  track.style.transform = `translateX(-${paginaActual * 25}%)`;
 
-  prev.disabled = !details;
+  botonesNav.forEach((boton, indice) => {
+    boton.classList.toggle("active", indice === paginaActual);
+  });
 
-  next.disabled = details;
+  numeroPagina.textContent =
+    `${String(paginaActual + 1).padStart(2, "0")} / ${TOTAL_PAGINAS}`;
 
+  botonAnterior.disabled = paginaActual === 0;
+  botonSiguiente.disabled = paginaActual === TOTAL_PAGINAS - 1;
+
+  botonAnterior.style.opacity = paginaActual === 0 ? ".35" : "1";
+  botonSiguiente.style.opacity =
+    paginaActual === TOTAL_PAGINAS - 1 ? ".35" : "1";
 }
 
+botonesNav.forEach((boton) => {
+  boton.addEventListener("click", () => {
+    mostrarPagina(Number(boton.dataset.page));
+  });
+});
 
-/* ABRIR PUERTAS */
+botonAnterior.addEventListener("click", () => {
+  mostrarPagina(paginaActual - 1);
+});
 
-function openInvitation() {
+botonSiguiente.addEventListener("click", () => {
+  mostrarPagina(paginaActual + 1);
+});
 
-  if (doors.classList.contains("hidden")) {
+botonesContinuar.forEach((boton) => {
+  boton.addEventListener("click", () => {
+    mostrarPagina(paginaActual + 1);
+  });
+});
 
-    showPage(2);
+// ========================================
+// CONTADOR REGRESIVO
+// ========================================
+
+const countdownMessage =
+  document.getElementById("countdown-message");
+
+function actualizarCuentaRegresiva() {
+  const fecha = new Date(
+    `${ANIO_BODA}-11-14T18:00:00-05:00`
+  );
+
+  const diferencia = fecha.getTime() - Date.now();
+
+  if (diferencia <= 0) {
+    countdownMessage.textContent = "¡Llegó nuestro gran día!";
+
+    ["days", "hours", "minutes", "seconds"].forEach((id) => {
+      document.getElementById(id).textContent = "00";
+    });
 
     return;
-
   }
 
-  doors.classList.add("open");
+  const partes = [
+    Math.floor(diferencia / 86400000),
+    Math.floor(diferencia / 3600000) % 24,
+    Math.floor(diferencia / 60000) % 60,
+    Math.floor(diferencia / 1000) % 60
+  ];
 
-  window.setTimeout(() => {
+  ["days", "hours", "minutes", "seconds"].forEach((id, indice) => {
+    document.getElementById(id).textContent =
+      String(partes[indice]).padStart(2, "0");
+  });
 
-    doors.classList.add("hidden");
-
-    showPage(2);
-
-  }, 1150);
-
+  countdownMessage.textContent = "¡Te esperamos!";
 }
 
+actualizarCuentaRegresiva();
+setInterval(actualizarCuentaRegresiva, 1000);
 
-/* BOTONES */
+// ========================================
+// UBICACIÓN
+// ========================================
 
-openBtn.addEventListener(
-  "click",
-  openInvitation
-);
+document.getElementById("map-button").addEventListener("click", () => {
+  const direccion = encodeURIComponent(
+    "Carrera 16 N 5 31, Barrio Buenos Aires"
+  );
 
-backBtn.addEventListener(
-  "click",
-  () => showPage(1)
-);
+  window.open(
+    `https://www.google.com/maps/search/?api=1&query=${direccion}`,
+    "_blank",
+    "noopener,noreferrer"
+  );
+});
 
-next.addEventListener(
-  "click",
-  openInvitation
-);
+// ========================================
+// CONFIRMACIÓN DE ASISTENCIA
+// ========================================
 
-prev.addEventListener(
-  "click",
-  () => showPage(1)
-);
+const formulario = document.getElementById("rsvp-form");
 
+formulario.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-/* DESLIZAR EN CELULAR */
+  const datos = new FormData(formulario);
 
-let startX = 0;
+  const nombre = String(datos.get("nombre") || "").trim();
+  const asistencia = String(datos.get("asistencia") || "");
+  const invitados = String(datos.get("invitados") || "");
+  const mensaje = String(datos.get("mensaje") || "").trim();
 
-book.addEventListener(
-  "touchstart",
-  event => {
+  const feedback = document.getElementById("form-feedback");
 
-    startX = event.changedTouches[0].clientX;
+  if (!nombre || !asistencia || !invitados) {
+    feedback.textContent = "Por favor, completa los campos obligatorios.";
+    return;
+  }
 
-  },
-  { passive: true }
-);
+  const texto =
+    `Confirmación de boda - María y José\n` +
+    `Nombre: ${nombre}\n` +
+    `Asistencia: ${asistencia}\n` +
+    `Número de asistentes: ${invitados}\n` +
+    `Mensaje: ${mensaje || "Sin mensaje"}`;
 
-book.addEventListener(
-  "touchend",
-  event => {
+  try {
+    if (navigator.share) {
+      await navigator.share({
+        title: "Confirmación de asistencia",
+        text: texto
+      });
 
-    const delta =
-      event.changedTouches[0].clientX - startX;
+      feedback.textContent =
+        "¡Gracias! Recuerda enviar la confirmación a los novios.";
 
-    if (Math.abs(delta) > 55) {
+    } else if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(texto);
 
-      if (
-        delta < 0 &&
-        !book.classList.contains("show-details")
-      ) {
+      feedback.textContent =
+        "¡Confirmación copiada! Ya puedes enviarla a los novios.";
 
-        openInvitation();
-
-      }
-
-      if (delta > 0) {
-
-        showPage(1);
-
-      }
-
+    } else {
+      feedback.textContent =
+        "No se pudo compartir automáticamente. " + texto;
     }
 
-  },
-  { passive: true }
-);
+  } catch (error) {
+    if (error.name !== "AbortError") {
+      feedback.textContent =
+        "No se pudo compartir. Intenta nuevamente.";
+    }
+  }
+});
 
+// ========================================
+// INICIAR EN LA PRIMERA PÁGINA
+// ========================================
 
-/* INICIAR */
-
-showPage(1);
+mostrarPagina(0);
