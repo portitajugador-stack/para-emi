@@ -1,54 +1,157 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#4b1028">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#641b35">
+
 <title>María & José | Nuestra boda</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-<main class="book" aria-label="Invitación de boda">
-<div class="hint">Desliza hacia los lados para pasar las páginas</div>
-<div class="door-overlay" id="doors" role="button" tabindex="0" aria-label="Toca para abrir las puertas de la invitación">
-<div class="door left"><span class="door-panel"></span><span class="door-handle"></span></div>
-<div class="door right"><span class="door-panel"></span><span class="door-handle"></span></div>
-<div class="door-title"><span class="door-flourish">❦</span><br>María <i>&</i> José<br><small>TOCA PARA ABRIR</small><br><span class="door-flourish">✧</span></div>
-</div>
-<div class="track" id="track">
-<section class="page"><article class="card">
-<div class="kicker">Con la bendición de Dios y nuestras familias</div><div class="flower">❧</div>
-<h1>María <span style="color:#c7a56a">&</span><br>José</h1><div class="rule"></div>
-<p>“Así que ya no son dos, sino uno solo. Por tanto, lo que Dios ha unido, que no lo separe el hombre.”</p><p class="small">Mateo 19:6</p><div class="note">Nuestra historia · Nuestra promesa · Nuestro amor</div>
-</article></section>
-<section class="page"><article class="card">
-<div class="kicker">Tenemos el honor de invitarte</div><h2>A nuestra<br><span class="names">boda</span></h2>
-<p>Con el corazón lleno de alegría, queremos compartir contigo el día en que uniremos nuestras vidas ante Dios.</p><div class="rule"></div>
-<div class="date">14 · NOVIEMBRE · 2026</div><div class="bigtime">6:00 de la tarde</div><div class="flower">❦</div>
-<p><strong> Carrera 16 N.º 5-31</strong><br>Barrio Buenos Aires<br>Girardot, Cundinamarca</p>
-</article></section>
-<section class="page"><article class="card">
-<div class="kicker">Un amor escrito en el tiempo</div><h2>Nuestra<br><span class="names">historia</span></h2><div class="flower">♡</div>
-<p>Hay encuentros que cambian el rumbo de la vida y amores que se convierten en hogar. Hoy damos gracias por cada paso que nos trajo hasta aquí y por el hermoso futuro que comenzamos juntos.</p><div class="rule"></div><p>Queremos que seas parte de este capítulo inolvidable.</p>
-</article></section>
-<section class="page"><article class="card">
-<div class="kicker">La cuenta regresiva</div><h2>Falta poco<br><span class="names">para el sí</span></h2><div class="flower">✧</div>
-<div id="count" class="date">—</div><p>Días · horas · minutos · segundos</p><div class="rule"></div><p>¡Nos emociona celebrar este día contigo!</p>
-</article></section>
-<section class="page"><article class="card">
-<div class="kicker">Código de vestuario</div><h2>Elegancia<br><span class="names">y amor</span></h2><div class="flower">❧</div>
-<p><strong>Vestuario formal</strong></p><p>Te invitamos a acompañarnos con un atuendo elegante para esta ocasión tan especial.</p><div class="rule"></div><p class="small">Por favor, reserva el blanco para la novia.</p>
-</article></section>
-<section class="page"><article class="card">
-<div class="kicker">Tu compañía es nuestro regalo</div><h2>¿Nos<br><span class="names">acompañas?</span></h2><div class="flower">♡</div>
-<p>Nos haría muy felices contar contigo en este día tan importante.</p><div class="rule"></div><p>Confirma tu asistencia con los novios.</p><p class="small">¡Te esperamos con mucho cariño!</p>
-</article></section>
-<section class="page"><article class="card">
-<div class="kicker">Con todo nuestro amor</div><div class="flower">❦</div><h1>María <span style="color:#c7a56a">&</span><br>José</h1><div class="rule"></div>
-<h2 class="names">¡Gracias!</h2><p>Por acompañarnos, por celebrar nuestro amor y por ser parte de este recuerdo que guardaremos para siempre.</p><div class="date" style="margin-top:20px">14 · 11 · 2026</div>
-</article></section>
-</div>
-<div class="nav"><button id="prev" aria-label="Página anterior">‹</button><div class="dots" id="dots"></div><button id="next" aria-label="Página siguiente">›</button></div>
+
+<main class="book" id="book">
+
+  <!-- PORTADA -->
+
+  <section class="page cover">
+
+    <div class="floral floral-top">❧ ❀ ❧</div>
+
+    <p class="eyebrow">
+      Con la bendición de Dios y nuestras familias
+    </p>
+
+    <div class="monogram">
+      M <span>&</span> J
+    </div>
+
+    <h1>María <em>&</em> José</h1>
+
+    <p class="intro">
+      Dos vidas, un amor y una promesa para siempre.
+    </p>
+
+    <p class="verse">
+      “Lo que Dios ha unido, que no lo separe el hombre.”
+      <br>
+      <small>Mateo 19:6</small>
+    </p>
+
+    <button class="open-btn" id="openBtn">
+      Abrir invitación <span>→</span>
+    </button>
+
+    <div class="floral floral-bottom">❧ ❀ ❧</div>
+
+    <div class="doors" id="doors">
+
+      <div class="door door-left">
+        <span>❦</span>
+      </div>
+
+      <div class="door door-right">
+        <span>❦</span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SEGUNDA PÁGINA -->
+
+  <section class="page details">
+
+    <div class="ornament">❧ ✦ ❧</div>
+
+    <p class="eyebrow">¡Nos casamos!</p>
+
+    <h2>
+      Y queremos compartir
+      <br>
+      este día contigo
+    </h2>
+
+    <div class="photo-frame">
+
+      <img
+        src="assets/foto-pareja.jpg"
+        alt="Fotografía de María y José"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'"
+      >
+
+      <div class="photo-fallback">
+        ♡
+        <span>
+          Agrega aquí
+          <br>
+          la foto de ustedes
+        </span>
+      </div>
+
+    </div>
+
+    <div class="event">
+
+      <p class="date">
+        SÁBADO
+        <strong>14</strong>
+        NOVIEMBRE
+        <strong>2026</strong>
+      </p>
+
+      <p class="time">
+        6:00 de la tarde
+      </p>
+
+      <div class="rule"></div>
+
+      <p class="place">
+        Carrera 16 N.º 5-31
+        <br>
+        Barrio Buenos Aires
+      </p>
+
+    </div>
+
+    <p class="closing">
+      Será una alegría contar con tu presencia.
+    </p>
+
+    <button class="back-btn" id="backBtn">
+      ← Volver a la portada
+    </button>
+
+  </section>
+
 </main>
+
+
+<nav class="pager">
+
+  <button id="prev" aria-label="Página anterior">
+    ‹
+  </button>
+
+  <span id="pageNumber">1 / 2</span>
+
+  <button id="next" aria-label="Página siguiente">
+    ›
+  </button>
+
+</nav>
+
+
 <script src="js/main.js"></script>
-</body></html>
+
+</body>
+</html>
