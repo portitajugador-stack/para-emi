@@ -26,19 +26,30 @@ body {
   overflow-x: hidden;
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
 .ambient {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: -1;
   background:
-    radial-gradient(circle at 10% 15%, #e8c9c966, transparent 35%),
-    radial-gradient(circle at 90% 85%, #bd9b7022, transparent 35%);
+    radial-gradient(circle at 15% 15%, #e8c9c966, transparent 35%),
+    radial-gradient(circle at 85% 80%, #bd9b7033, transparent 35%);
 }
 
 .topbar {
-  height: 65px;
-  padding: 0 7%;
+  width: 100%;
+  padding: 20px 7%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,74 +58,47 @@ body {
 
 .brand {
   font-family: "Italiana", serif;
-  font-size: 25px;
-  letter-spacing: 3px;
+  font-size: 28px;
+  color: var(--wine);
 }
 
 .brand span,
 .couple span,
-h3 span,
-footer h3 span {
+footer h3 span,
+.door-content h1 span,
+.door-decoration span {
   color: var(--gold);
 }
 
 .top-date {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 3px;
+  color: var(--wine-light);
 }
 
-/* PORTADA */
-
 .entrance {
-  min-height: calc(100vh - 65px);
+  min-height: calc(100vh - 70px);
+  padding: 45px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 35px 15px;
-  transition: opacity 1s, transform 1s;
+  justify-content: center;
+  text-align: center;
 }
 
 .door-frame {
-  width: min(440px, 90vw);
-  height: min(590px, 72vh);
-  min-height: 450px;
   position: relative;
+  width: min(420px, 90vw);
+  height: min(570px, 70vh);
+  min-height: 430px;
   overflow: hidden;
-  border: 8px solid var(--gold);
+  border: 9px solid var(--gold);
   outline: 1px solid var(--wine);
   outline-offset: 5px;
   background:
-    linear-gradient(135deg, #f8f0e6, #e8c9c9);
-  box-shadow: 0 25px 60px #4b102833;
+    linear-gradient(135deg, #702d45, #4b1028 55%, #35101f);
   perspective: 1200px;
-}
-
-.door-content {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 25px;
-}
-
-.door-decoration {
-  position: absolute;
-  top: 20px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-family: "Italiana", serif;
-  font-size: 25px;
-  z-index: 2;
-}
-
-.door-decoration span {
-  color: var(--gold);
+  box-shadow: 0 20px 50px #4b102833;
 }
 
 .door {
@@ -126,64 +110,72 @@ footer h3 span {
   background:
     repeating-linear-gradient(
       90deg,
-      #4b1028 0px,
-      #58172f 12px,
-      #4b1028 24px
-    );
-  border: 3px solid var(--gold);
-  transition: transform 2s cubic-bezier(.75, 0, .2, 1);
-}
-
-.door::before {
-  content: "";
-  position: absolute;
-  inset: 12px;
-  border: 1px solid #bd9b70;
-}
-
-.door::after {
-  content: "✧";
-  color: var(--gold);
-  font-size: 35px;
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+      transparent 0,
+      transparent 35px,
+      #ffffff0a 36px,
+      transparent 38px
+    ),
+    linear-gradient(135deg, #702d45, #4b1028);
+  border: 2px solid #bd9b7080;
+  transition: transform 1.8s cubic-bezier(.77, 0, .18, 1);
+  transform-style: preserve-3d;
 }
 
 .door-left {
   left: 0;
-  transform-origin: left;
+  transform-origin: left center;
+  border-right: 3px solid var(--gold);
 }
 
 .door-right {
   right: 0;
-  transform-origin: right;
+  transform-origin: right center;
+  border-left: 3px solid var(--gold);
 }
 
 .door-frame.open .door-left {
-  transform: perspective(1000px) rotateY(-110deg);
+  transform: rotateY(-110deg);
 }
 
 .door-frame.open .door-right {
-  transform: perspective(1000px) rotateY(110deg);
+  transform: rotateY(110deg);
+}
+
+.door-decoration {
+  position: absolute;
+  z-index: 4;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Italiana", serif;
+  font-size: 30px;
+  color: var(--cream);
+}
+
+.door-content {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  color: var(--cream);
+}
+
+.door-content h1 {
+  font-family: "Italiana", serif;
+  font-size: clamp(40px, 9vw, 65px);
+  font-weight: 400;
+  margin: 20px 0;
 }
 
 .eyebrow {
   font-size: 10px;
   letter-spacing: 3px;
   line-height: 1.8;
-  margin-bottom: 18px;
-}
-
-.door-content h1 {
-  font-family: "Italiana", serif;
-  font-size: clamp(38px, 8vw, 65px);
-  font-weight: 400;
-  margin-bottom: 15px;
-}
-
-.door-content h1 span {
+  text-align: center;
   color: var(--gold);
 }
 
@@ -191,7 +183,7 @@ footer h3 span {
   font-family: "Cormorant Garamond", serif;
   font-size: 22px;
   font-style: italic;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
 }
 
 .main-button {
@@ -199,40 +191,40 @@ footer h3 span {
   border: 1px solid var(--gold);
   background: var(--wine);
   color: var(--cream);
-  padding: 14px 25px;
-  font-family: "Montserrat", sans-serif;
+  padding: 13px 23px;
   font-size: 10px;
   letter-spacing: 2px;
-  cursor: pointer;
-  transition: .3s;
-  margin-top: 15px;
+  transition: .3s ease;
+  margin: 10px auto;
 }
 
 .main-button:hover {
   background: var(--gold);
   color: var(--wine);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+}
+
+.main-button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 .entrance-note {
-  text-align: center;
-  margin-top: 30px;
+  margin-top: 35px;
   font-family: "Cormorant Garamond", serif;
-  font-size: 19px;
+  font-size: 21px;
   font-style: italic;
 }
-
-/* INVITACIÓN */
 
 .hidden {
   display: none !important;
 }
 
+/* INVITACIÓN */
+
 .invitation {
-  max-width: 1050px;
-  width: 94%;
-  margin: 35px auto;
-  text-align: center;
+  width: min(950px, 94%);
+  margin: 35px auto 60px;
   animation: appear 1s ease both;
 }
 
@@ -247,24 +239,21 @@ footer h3 span {
   }
 }
 
-/* NAVEGACIÓN */
-
 .navigation {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 25px;
+  margin-bottom: 22px;
 }
 
 .nav-btn {
+  border: 1px solid #bd9b7066;
   background: transparent;
-  border: 1px solid #bd9b7080;
   color: var(--wine);
-  padding: 10px 16px;
-  font-size: 9px;
+  padding: 11px 17px;
+  font-size: 10px;
   letter-spacing: 1px;
-  cursor: pointer;
   transition: .3s;
 }
 
@@ -274,142 +263,146 @@ footer h3 span {
   color: var(--cream);
 }
 
-/* DESLIZAMIENTO HORIZONTAL */
-
 .slider-window {
   width: 100%;
   overflow: hidden;
   border: 1px solid #bd9b7080;
-  background: #fffaf4aa;
-  box-shadow: 0 15px 40px #4b102815;
+  background: #fffaf4;
+  box-shadow: 0 15px 40px #4b10281a;
 }
 
 .slider-track {
   display: flex;
   width: 400%;
-  transition: transform .8s cubic-bezier(.65, 0, .35, 1);
+  transition: transform .8s cubic-bezier(.77, 0, .18, 1);
+  will-change: transform;
 }
 
 .page {
+  flex: 0 0 25%;
   width: 25%;
-  min-height: 580px;
-  padding: 55px 25px;
+  min-width: 0;
+  min-height: 570px;
+  padding: 55px 30px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  flex-shrink: 0;
+  justify-content: center;
+  text-align: center;
 }
 
 .ornament {
-  color: var(--gold);
   font-size: 30px;
-  margin-bottom: 18px;
+  color: var(--gold);
+  margin-bottom: 15px;
 }
 
 .page h2 {
   font-family: "Italiana", serif;
   font-weight: 400;
-  font-size: clamp(35px, 6vw, 55px);
-  margin-bottom: 20px;
+  font-size: clamp(36px, 6vw, 55px);
+  margin: 12px 0 20px;
+  color: var(--wine);
 }
 
 .flourish {
+  font-size: 35px;
   color: var(--gold);
-  font-size: 38px;
-  margin-bottom: 15px;
+  margin: 0 0 15px;
 }
 
 .intro {
   max-width: 520px;
   font-family: "Cormorant Garamond", serif;
-  font-size: 22px;
-  line-height: 1.6;
+  font-size: 21px;
+  line-height: 1.5;
   margin: 8px auto;
 }
 
 .couple {
   font-family: "Italiana", serif;
-  font-size: 43px;
+  font-size: 38px;
   font-weight: 400;
-  margin-top: 25px;
+  margin: 25px 0 5px;
 }
 
 .date-line {
-  letter-spacing: 3px;
-  font-size: 11px;
-  margin-top: 12px;
+  color: var(--wine-light);
+  letter-spacing: 2px;
+  font-size: 12px;
+  margin-bottom: 15px;
 }
 
 .detail-box {
   width: min(440px, 100%);
-  padding: 22px;
+  padding: 20px;
   margin: 10px auto;
-  border-top: 1px solid #bd9b7080;
-  border-bottom: 1px solid #bd9b7080;
+  border: 1px solid #bd9b7066;
+  background: #f8f0e688;
 }
 
 .detail-icon {
+  display: block;
   color: var(--gold);
-  font-size: 26px;
+  font-size: 25px;
+  margin-bottom: 8px;
 }
 
 .detail-label {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 3px;
-  margin: 10px 0;
+  color: var(--wine-light);
+  margin-bottom: 8px;
 }
 
 .detail-box h3 {
   font-family: "Cormorant Garamond", serif;
   font-size: 25px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.detail-box p:not(.detail-label) {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 19px;
+.detail-box p {
+  font-size: 13px;
+  margin-top: 5px;
 }
 
 .closing {
   font-family: "Cormorant Garamond", serif;
-  font-size: 22px;
   font-style: italic;
+  font-size: 21px;
   margin-top: 15px;
 }
-
-/* CONTADOR */
 
 .countdown {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 18px;
-  margin: 20px 0;
+  gap: 14px;
+  margin: 15px 0;
 }
 
 .countdown div {
-  min-width: 55px;
   display: flex;
   flex-direction: column;
+  min-width: 55px;
   gap: 5px;
 }
 
 .countdown strong {
   font-family: "Italiana", serif;
-  font-size: 32px;
-  font-weight: 400;
+  font-size: 30px;
+  color: var(--wine);
 }
 
 .countdown small {
-  font-size: 8px;
-  letter-spacing: 2px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--gold);
 }
 
 /* FORMULARIO */
 
 #rsvp-form {
-  width: min(440px, 100%);
+  width: min(420px, 100%);
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -417,22 +410,21 @@ footer h3 span {
 }
 
 #rsvp-form label {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 1px;
-  margin: 12px 0 7px;
+  margin: 12px 0 6px;
 }
 
 #rsvp-form input,
 #rsvp-form select,
 #rsvp-form textarea {
   width: 100%;
-  padding: 13px;
+  padding: 12px;
   border: 1px solid #bd9b7080;
-  background: #fffaf4;
+  background: #fff;
   color: var(--wine);
-  font-family: "Montserrat", sans-serif;
-  font-size: 12px;
   outline: none;
+  border-radius: 0;
 }
 
 #rsvp-form input:focus,
@@ -442,15 +434,20 @@ footer h3 span {
 }
 
 #rsvp-form textarea {
-  min-height: 90px;
+  min-height: 80px;
   resize: vertical;
 }
 
+#rsvp-form .main-button {
+  align-self: center;
+  margin-top: 20px;
+}
+
 #form-feedback {
+  text-align: center;
   font-size: 12px;
-  line-height: 1.6;
-  margin-top: 15px;
-  overflow-wrap: anywhere;
+  line-height: 1.5;
+  margin-top: 10px;
 }
 
 /* CONTROLES */
@@ -459,70 +456,72 @@ footer h3 span {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;
-  padding: 22px;
+  gap: 25px;
+  margin: 22px 0;
 }
 
 .slider-controls button {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border: 1px solid var(--gold);
   background: transparent;
   color: var(--wine);
-  font-size: 22px;
-  cursor: pointer;
+  font-size: 20px;
   transition: .3s;
 }
 
-.slider-controls button:hover {
+.slider-controls button:hover:not(:disabled) {
   background: var(--wine);
   color: var(--cream);
 }
 
-#page-number {
-  font-size: 10px;
-  letter-spacing: 2px;
+.slider-controls button:disabled {
+  cursor: not-allowed;
 }
 
-/* PIE */
+#page-number {
+  font-size: 11px;
+  letter-spacing: 3px;
+}
 
 footer {
-  padding: 35px 10px;
-  border-top: 1px solid #bd9b7044;
+  padding: 25px 10px;
+  border-top: 1px solid #bd9b7066;
+  text-align: center;
 }
 
 footer p {
   font-family: "Cormorant Garamond", serif;
-  font-size: 19px;
   font-style: italic;
+  font-size: 18px;
 }
 
 footer h3 {
   font-family: "Italiana", serif;
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 400;
-  margin: 8px;
+  margin: 7px;
 }
 
 footer small {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 3px;
 }
 
-/* MÓVILES */
+/* CELULARES */
 
 @media (max-width: 600px) {
   .topbar {
-    padding: 0 5%;
+    padding: 15px 5%;
   }
 
   .top-date {
-    font-size: 8px;
+    font-size: 9px;
+    letter-spacing: 2px;
   }
 
   .door-frame {
-    min-height: 480px;
-    height: 68vh;
+    min-height: 450px;
   }
 
   .navigation {
@@ -531,33 +530,31 @@ footer small {
 
   .nav-btn {
     padding: 9px 10px;
-    font-size: 8px;
+    font-size: 9px;
   }
 
   .page {
     min-height: 600px;
-    padding: 40px 18px;
+    padding: 35px 18px;
+  }
+
+  .page h2 {
+    font-size: 39px;
   }
 
   .intro {
-    font-size: 20px;
-  }
-
-  .couple {
-    font-size: 36px;
+    font-size: 19px;
   }
 
   .countdown {
-    gap: 12px;
+    gap: 7px;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-    animation-duration: .01ms !important;
+  .countdown div {
+    min-width: 48px;
+  }
+
+  .countdown strong {
+    font-size: 26px;
   }
 }
