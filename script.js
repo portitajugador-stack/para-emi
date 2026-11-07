@@ -1,26 +1,8 @@
-const doorIntro = document.getElementById("doorIntro");
-const openDoors = document.getElementById("openDoors");
 
-openDoors.addEventListener("click", () => {
-  doorIntro.classList.add("opening");
-  window.setTimeout(() => {
-    doorIntro.classList.add("gone");
-  }, 1850);
-});
-
-const pageOne = document.getElementById("pageOne");
-const pageTwo = document.getElementById("pageTwo");
-
-document.getElementById("nextButton").addEventListener("click", () => {
-  pageOne.classList.remove("active");
-  pageTwo.classList.add("active");
-  pageOne.setAttribute("aria-hidden", "true");
-  pageTwo.setAttribute("aria-hidden", "false");
-});
-
-document.getElementById("backButton").addEventListener("click", () => {
-  pageTwo.classList.remove("active");
-  pageOne.classList.add("active");
-  pageTwo.setAttribute("aria-hidden", "true");
-  pageOne.setAttribute("aria-hidden", "false");
-});
+const track=document.getElementById('track'), pages=[...document.querySelectorAll('.page')], dots=document.getElementById('dots');let index=0,startX=0;
+pages.forEach((_,i)=>{let b=document.createElement('button');b.setAttribute('aria-label','Ir a página '+(i+1));b.onclick=()=>go(i);dots.appendChild(b)});
+function go(i){index=Math.max(0,Math.min(pages.length-1,i));track.style.transform=`translateX(-${index*100}%)`;[...dots.children].forEach((d,j)=>d.classList.toggle('active',j===index));document.getElementById('prev').style.opacity=index===0?'.35':'1';document.getElementById('next').style.opacity=index===pages.length-1?'.35':'1'}
+document.getElementById('prev').onclick=()=>go(index-1);document.getElementById('next').onclick=()=>go(index+1);
+track.addEventListener('touchstart',e=>startX=e.touches[0].clientX,{passive:true});track.addEventListener('touchend',e=>{let dx=e.changedTouches[0].clientX-startX;if(Math.abs(dx)>45)go(index+(dx<0?1:-1))},{passive:true});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(index+1);if(e.key==='ArrowLeft')go(index-1)});
+function countdown(){let target=new Date('2026-11-14T18:00:00-05:00'),now=new Date(),ms=target-now;if(ms<=0){document.getElementById('count').textContent='¡Llegó nuestro gran día!';return}let d=Math.floor(ms/86400000),h=Math.floor(ms%86400000/3600000),m=Math.floor(ms%3600000/60000),s=Math.floor(ms%60000/1000);document.getElementById('count').textContent=`${d} días · ${h} h · ${m} min · ${s} s`}setInterval(countdown,1000);countdown();go(0);\nconst doors=document.getElementById('doors');function openDoors(e){if(e)e.preventDefault();if(doors.classList.contains('open'))return;doors.classList.add('open');doors.setAttribute('aria-label','Puertas abriéndose');setTimeout(()=>doors.remove(),1750)}doors.addEventListener('click',openDoors);doors.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openDoors(e)}});
