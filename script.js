@@ -1,13 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   /* ==================================
-     ABRIR LAS PUERTAS DE LA INVITACIÓN
+     ABRIR LAS PUERTAS
   ================================== */
 
   const openButton = document.getElementById("openDoor");
   const doorScreen = document.getElementById("doorScreen");
 
   if (openButton && doorScreen) {
+
     openButton.addEventListener("click", function () {
 
       if (document.body.classList.contains("door-open")) {
@@ -22,10 +23,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 1800);
 
     });
+
   }
 
   /* ==================================
-     CAMBIAR LAS PÁGINAS CON BOTONES
+     NAVEGACIÓN ENTRE LAS 4 PÁGINAS
   ================================== */
 
   const sliderTrack = document.getElementById("sliderTrack");
@@ -43,7 +45,10 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    currentPage = Math.max(0, Math.min(page, totalPages - 1));
+    currentPage = Math.max(
+      0,
+      Math.min(page, totalPages - 1)
+    );
 
     sliderTrack.style.transform =
       "translateX(-" + (currentPage * 25) + "%)";
@@ -64,7 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
           : "SIGUIENTE";
     }
 
-    /* Regresa al inicio de la página */
     document.querySelectorAll(".page").forEach(function (pageElement) {
       pageElement.scrollTop = 0;
     });
@@ -91,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
   showPage(0);
 
   /* ==================================
-     CUENTA REGRESIVA DE LA BODA
+     CUENTA REGRESIVA
   ================================== */
 
   const weddingDate = new Date(
@@ -108,8 +112,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const minutesElement = document.getElementById("minutes");
     const secondsElement = document.getElementById("seconds");
 
-    if (!daysElement || !hoursElement ||
-        !minutesElement || !secondsElement) {
+    if (
+      !daysElement ||
+      !hoursElement ||
+      !minutesElement ||
+      !secondsElement
+    ) {
       return;
     }
 
@@ -144,6 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   updateCountdown();
+
   setInterval(updateCountdown, 1000);
 
 });
