@@ -1,96 +1,646 @@
-
-/* GALERIA DESPLEGABLE DE FOTOGRAFIAS */
-
-.photo-gallery {
-    max-width: 520px;
-    margin: 30px auto 0;
-    text-align: center;
+:root {
+  --wine: #4b1028;
+  --wine-light: #702d45;
+  --cream: #f8f0e6;
+  --pink: #e8c9c9;
+  --gold: #bd9b70;
+  --text: #4b1028;
+  --white: #fffaf5;
 }
 
-.photo-gallery summary {
-    list-style: none;
-    cursor: pointer;
-    display: inline-block;
-    padding: 16px 25px;
-    border: 1px solid #b99a50;
-    border-radius: 35px;
-    color: #4b1028;
-    background: #fffaf3;
-    font-size: 13px;
-    letter-spacing: 1px;
-    transition: .3s;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.photo-gallery summary::-webkit-details-marker {
-    display: none;
+html {
+  scroll-behavior: smooth;
 }
 
-.photo-gallery summary:hover {
-    background: #4b1028;
-    color: white;
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top, #fffaf5 0%, #f8f0e6 55%, #ead8cf 100%);
+  color: var(--text);
+  font-family: "Montserrat", sans-serif;
 }
 
-.gallery-content {
-    margin-top: 25px;
-    padding: 25px 15px;
-    background: #fffaf3;
-    border: 1px solid #d5bd91;
-    border-radius: 12px;
-    animation: galleryOpen .5s ease;
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
-.gallery-content h3 {
-    color: #4b1028;
-    font: 30px 'Cormorant Garamond', serif;
+button {
+  cursor: pointer;
 }
 
-.gallery-images {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 20px;
+/* FONDO DECORATIVO */
+
+.ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .28;
+  z-index: -1;
+  background-image:
+    radial-gradient(circle, var(--gold) 1px, transparent 1.5px);
+  background-size: 35px 35px;
 }
 
-.gallery-images img {
-    width: 100%;
-    height: 190px;
-    object-fit: cover;
-    border: 5px solid white;
-    box-shadow: 0 5px 15px #4b102825;
-    border-radius: 5px;
+/* ENCABEZADO */
+
+.topbar {
+  width: 100%;
+  padding: 22px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--wine);
 }
 
-.gallery-images img:last-child {
-    grid-column: 1 / -1;
-    height: 240px;
+.brand {
+  font-family: "Italiana", serif;
+  font-size: 27px;
+  letter-spacing: 3px;
 }
 
-.gallery-footer {
-    color: #4b1028;
-    font: italic 22px 'Cormorant Garamond', serif;
-    margin-top: 20px;
+.brand span,
+.topbar span span,
+.couple span,
+footer h3 span {
+  color: var(--gold);
 }
 
-@keyframes galleryOpen {
-    from {
-        opacity: 0;
-        transform: translateY(-12px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.top-date {
+  font-size: 11px;
+  letter-spacing: 3px;
 }
 
-@media(max-width: 500px) {
+/* PORTADA */
 
-    .gallery-images img {
-        height: 140px;
-    }
+.entrance {
+  min-height: calc(100vh - 75px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 15px 50px;
+}
 
-    .gallery-images img:last-child {
-        height: 190px;
-    }
+.door-frame {
+  position: relative;
+  width: min(440px, 90vw);
+  height: min(610px, 76vh);
+  min-height: 490px;
+  overflow: hidden;
+  border: 9px solid var(--gold);
+  border-radius: 220px 220px 8px 8px;
+  background: linear-gradient(145deg, #702d45, #3b0c20);
+  box-shadow:
+    0 25px 65px rgba(75, 16, 40, .25),
+    inset 0 0 0 3px rgba(255,255,255,.2);
+}
 
+.door-frame::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(237, 210, 166, .65);
+  border-radius: 210px 210px 4px 4px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.door-decoration {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: var(--cream);
+  font-family: "Italiana", serif;
+  font-size: 30px;
+  letter-spacing: 5px;
+  z-index: 2;
+}
+
+.door-decoration span {
+  color: var(--gold);
+}
+
+.door {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 3;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.06), transparent 25%),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 35px,
+      rgba(0,0,0,.12) 36px,
+      transparent 39px
+    ),
+    linear-gradient(135deg, #702d45, #3b0c20);
+  border: 2px solid rgba(189,155,112,.6);
+  transition: transform 1.8s cubic-bezier(.7,0,.2,1);
+}
+
+.door-left {
+  left: 0;
+  transform-origin: left center;
+  border-right: 2px solid var(--gold);
+}
+
+.door-right {
+  right: 0;
+  transform-origin: right center;
+  border-left: 2px solid var(--gold);
+}
+
+.door-frame.open .door-left {
+  transform: perspective(900px) rotateY(-105deg);
+}
+
+.door-frame.open .door-right {
+  transform: perspective(900px) rotateY(105deg);
+}
+
+.door-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 25px;
+  text-align: center;
+  color: var(--cream);
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 3px;
+  line-height: 1.8;
+  color: var(--gold);
+}
+
+.door-content h1 {
+  margin: 22px 0 12px;
+  font-family: "Italiana", serif;
+  font-size: clamp(40px, 8vw, 65px);
+  font-weight: 400;
+}
+
+.door-content h1 span {
+  color: var(--gold);
+}
+
+.door-subtitle {
+  margin-bottom: 35px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 23px;
+  font-style: italic;
+}
+
+.entrance-note {
+  margin-top: 22px;
+  color: var(--wine-light);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 21px;
+  font-style: italic;
+  text-align: center;
+}
+
+/* BOTONES */
+
+.main-button {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  padding: 14px 25px;
+  background: var(--wine);
+  color: var(--cream);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  transition: .3s ease;
+}
+
+.main-button:hover {
+  background: var(--gold);
+  color: var(--wine);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+}
+
+/* INVITACIÓN */
+
+.hidden {
+  display: none !important;
+}
+
+.invitation {
+  width: min(1100px, 94%);
+  margin: 20px auto 50px;
+  animation: appear 1s ease both;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* NAVEGACIÓN */
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.nav-btn {
+  padding: 11px 17px;
+  border: 1px solid rgba(189,155,112,.55);
+  background: rgba(255,250,245,.7);
+  color: var(--wine);
+  font-size: 10px;
+  letter-spacing: 1px;
+  transition: .3s;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+  background: var(--wine);
+  color: var(--cream);
+  border-color: var(--wine);
+}
+
+/* DESLIZAMIENTO HORIZONTAL */
+
+.slider-window {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(189,155,112,.65);
+  border-radius: 5px;
+  background: rgba(255,250,245,.75);
+  box-shadow: 0 20px 55px rgba(75,16,40,.12);
+}
+
+.slider-track {
+  display: flex;
+  width: 100%;
+  transition: transform .8s cubic-bezier(.7,0,.2,1);
+  will-change: transform;
+}
+
+.page {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 100%;
+  min-height: 590px;
+  padding: 55px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.ornament {
+  margin-bottom: 15px;
+  color: var(--gold);
+  font-size: 32px;
+}
+
+.page h2 {
+  margin: 10px 0 20px;
+  color: var(--wine);
+  font-family: "Italiana", serif;
+  font-size: clamp(38px, 6vw, 58px);
+  font-weight: 400;
+}
+
+.flourish {
+  margin-bottom: 18px;
+  color: var(--gold);
+  font-size: 40px;
+}
+
+.intro {
+  max-width: 510px;
+  margin: 9px auto;
+  color: #76515d;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.couple {
+  margin-top: 20px;
+  color: var(--wine);
+  font-family: "Italiana", serif;
+  font-size: 38px;
+  font-weight: 400;
+}
+
+.date-line {
+  margin: 10px 0 25px;
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.closing {
+  margin: 18px 0 25px;
+  color: var(--wine-light);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 23px;
+  font-style: italic;
+}
+
+/* TARJETAS DE DETALLES */
+
+.detail-box {
+  width: min(390px, 100%);
+  margin: 12px auto;
+  padding: 22px 18px;
+  border: 1px solid rgba(189,155,112,.55);
+  background: rgba(248,240,230,.7);
+  box-shadow: 0 8px 22px rgba(75,16,40,.05);
+}
+
+.detail-icon {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--gold);
+  font-size: 27px;
+}
+
+.detail-label {
+  margin-bottom: 8px;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+.detail-box h3 {
+  color: var(--wine);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.detail-box p:not(.detail-label) {
+  margin-top: 5px;
+  color: #76515d;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 19px;
+}
+
+.location-box {
+  margin-top: 10px;
+}
+
+/* CUENTA REGRESIVA */
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 17px 0;
+}
+
+.countdown div {
+  min-width: 58px;
+  padding: 10px 5px;
+  border: 1px solid rgba(189,155,112,.6);
+  background: var(--white);
+}
+
+.countdown strong {
+  display: block;
+  color: var(--wine);
+  font-family: "Italiana", serif;
+  font-size: 27px;
+  font-weight: 400;
+}
+
+.countdown small {
+  display: block;
+  margin-top: 5px;
+  color: var(--gold);
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+/* FORMULARIO */
+
+#rsvp-form {
+  width: min(430px, 100%);
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+#rsvp-form label {
+  margin: 12px 0 6px;
+  color: var(--wine);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+#rsvp-form input,
+#rsvp-form select,
+#rsvp-form textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid rgba(189,155,112,.7);
+  border-radius: 2px;
+  outline: none;
+  background: #fffaf5;
+  color: var(--wine);
+  font-size: 13px;
+}
+
+#rsvp-form input:focus,
+#rsvp-form select:focus,
+#rsvp-form textarea:focus {
+  border-color: var(--wine);
+  box-shadow: 0 0 0 2px rgba(75,16,40,.08);
+}
+
+#rsvp-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+#rsvp-form button {
+  margin-top: 20px;
+}
+
+#form-feedback {
+  margin-top: 12px;
+  color: var(--wine);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* CONTROLES */
+
+.slider-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin: 20px 0 35px;
+}
+
+.slider-controls button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  background: var(--wine);
+  color: var(--cream);
+  font-size: 20px;
+  transition: .3s;
+}
+
+.slider-controls button:hover {
+  background: var(--gold);
+  color: var(--wine);
+}
+
+#page-number {
+  color: var(--wine);
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+/* PIE DE PÁGINA */
+
+footer {
+  padding: 25px 10px;
+  border-top: 1px solid rgba(189,155,112,.5);
+  text-align: center;
+}
+
+footer p {
+  color: #76515d;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  font-style: italic;
+}
+
+footer h3 {
+  margin: 5px 0;
+  color: var(--wine);
+  font-family: "Italiana", serif;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+footer small {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+/* CELULARES Y TABLETAS */
+
+@media (max-width: 600px) {
+  .topbar {
+    padding: 16px 5%;
+  }
+
+  .entrance {
+    min-height: calc(100vh - 60px);
+  }
+
+  .door-frame {
+    width: min(360px, 92vw);
+    height: 540px;
+    min-height: 480px;
+  }
+
+  .door-content h1 {
+    font-size: 43px;
+  }
+
+  .entrance-note {
+    font-size: 18px;
+  }
+
+  .invitation {
+    width: 96%;
+    margin-top: 10px;
+  }
+
+  .navigation {
+    gap: 5px;
+  }
+
+  .nav-btn {
+    padding: 9px 10px;
+    font-size: 9px;
+  }
+
+  .page {
+    min-height: 570px;
+    padding: 38px 17px;
+  }
+
+  .page h2 {
+    font-size: 40px;
+  }
+
+  .intro {
+    font-size: 19px;
+  }
+
+  .detail-box {
+    padding: 17px 12px;
+  }
+
+  .countdown {
+    gap: 6px;
+  }
+
+  .countdown div {
+    min-width: 53px;
+  }
+}
+
+@media (max-width: 360px) {
+  .countdown div {
+    min-width: 45px;
+  }
+
+  .countdown strong {
+    font-size: 23px;
+  }
+
+  .nav-btn {
+    padding: 8px;
+    font-size: 8px;
+  }
 }
