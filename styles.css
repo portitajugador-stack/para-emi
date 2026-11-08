@@ -13,7 +13,8 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   min-height: 100%;
 }
@@ -25,7 +26,7 @@ body {
   overflow: hidden;
 }
 
-/* PUERTAS DE ENTRADA */
+/* PUERTAS */
 .door-screen {
   position: fixed;
   inset: 0;
@@ -36,8 +37,7 @@ body {
   align-items: center;
   gap: 25px;
   padding: 20px;
-  background:
-    radial-gradient(circle at center, #fff8ef 0%, #e8c9c9 100%);
+  background: radial-gradient(circle at center, #fff8ef 0%, #e8c9c9 100%);
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -173,7 +173,7 @@ body {
   letter-spacing: 4px;
 }
 
-/* ANIMACIÓN AL ABRIR */
+/* ANIMACIÓN DE APERTURA */
 body.door-open .door-left {
   transform: rotateY(-115deg);
 }
@@ -197,8 +197,7 @@ body.door-open .door-screen {
   flex-direction: column;
   opacity: 0;
   transition: opacity 1s ease;
-  background:
-    radial-gradient(circle at top, #fffaf4, var(--cream));
+  background: radial-gradient(circle at top, #fffaf4, var(--cream));
 }
 
 body.door-open .invitation {
@@ -289,6 +288,7 @@ body.door-open .invitation {
   color: #765765;
 }
 
+/* FOTOGRAFÍAS */
 .photo-frame {
   padding: 7px;
   border: 1px solid var(--gold);
@@ -378,7 +378,7 @@ body.door-open .invitation {
   letter-spacing: 3px;
 }
 
-/* DETALLES */
+/* DETALLES DEL EVENTO */
 .detail-item {
   margin: 20px auto;
   max-width: 400px;
@@ -528,7 +528,7 @@ body.door-open .invitation {
   color: #765765;
 }
 
-/* CONTROLES */
+/* BOTONES DE NAVEGACIÓN */
 .slider-controls {
   flex-shrink: 0;
   min-height: 58px;
@@ -572,7 +572,7 @@ body.door-open .invitation {
   color: var(--gold);
 }
 
-/* PANTALLAS PEQUEÑAS */
+/* CELULARES */
 @media (max-width: 480px) {
   .top-header {
     padding: 10px;
