@@ -1,667 +1,149 @@
+document.addEventListener("DOMContentLoaded", function () {
 
-:root {
-  --wine: #4b1028;
-  --wine-light: #702d45;
-  --cream: #f8f0e6;
-  --pink: #e8c9c9;
-  --gold: #bd9b70;
-  --text: #4b1028;
-}
+  /* ==================================
+     ABRIR LAS PUERTAS DE LA INVITACIÓN
+  ================================== */
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+  const openButton = document.getElementById("openDoor");
+  const doorScreen = document.getElementById("doorScreen");
 
-html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
+  if (openButton && doorScreen) {
+    openButton.addEventListener("click", function () {
 
-body {
-  font-family: Georgia, "Times New Roman", serif;
-  color: var(--text);
-  background: var(--cream);
-}
+      if (document.body.classList.contains("door-open")) {
+        return;
+      }
 
-/* PUERTA */
+      document.body.classList.add("door-open");
+      openButton.disabled = true;
 
-.door-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background:
-    radial-gradient(circle, rgba(255,255,255,.10), transparent 65%),
-    var(--wine);
-  transition: opacity 1s ease, visibility 1s ease;
-}
+      setTimeout(function () {
+        doorScreen.style.display = "none";
+      }, 1800);
 
-.door-decoration {
-  width: min(92%, 650px);
-  text-align: center;
-  color: var(--cream);
-}
-
-.door-small {
-  color: var(--gold);
-  letter-spacing: 5px;
-  font-size: 11px;
-  margin-bottom: 12px;
-}
-
-.door-decoration h1 {
-  font-size: clamp(38px, 8vw, 66px);
-  font-weight: normal;
-  margin-bottom: 8px;
-}
-
-.door-decoration h1 span,
-.couple-name span,
-.signature span {
-  color: var(--gold);
-  font-style: italic;
-}
-
-.door-date {
-  color: var(--pink);
-  letter-spacing: 4px;
-  font-size: 13px;
-  margin-bottom: 24px;
-}
-
-.door-frame {
-  width: min(300px, 75vw);
-  height: min(390px, 47vh);
-  min-height: 260px;
-  margin: 0 auto;
-  padding: 10px;
-  border: 3px solid var(--gold);
-  border-radius: 150px 150px 0 0;
-  background: #28101b;
-  perspective: 1200px;
-}
-
-.door {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: flex;
-  overflow: hidden;
-  border: 2px solid var(--gold);
-  border-radius: 140px 140px 0 0;
-  background: #28101b;
-}
-
-.door-leaf {
-  position: relative;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, #35101f, #692c43);
-  border: 3px solid #bd9b70;
-  transition: transform 1.7s cubic-bezier(.7, 0, .2, 1);
-  transform-style: preserve-3d;
-}
-
-.door-left {
-  transform-origin: left center;
-  border-right: 1px solid var(--gold);
-}
-
-.door-right {
-  transform-origin: right center;
-  border-left: 1px solid var(--gold);
-}
-
-.door-panel {
-  position: absolute;
-  inset: 12px 9px;
-  border: 2px solid rgba(189,155,112,.8);
-  border-radius: 110px 110px 0 0;
-}
-
-.door-panel::after {
-  content: "";
-  position: absolute;
-  inset: 35% 8px 8px;
-  border: 2px solid rgba(189,155,112,.6);
-}
-
-.door-handle {
-  position: absolute;
-  top: 55%;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--gold);
-  box-shadow: 0 0 10px var(--gold);
-}
-
-.door-left .door-handle {
-  right: 12px;
-}
-
-.door-right .door-handle {
-  left: 12px;
-}
-
-.open-button {
-  margin-top: 25px;
-  padding: 14px 30px;
-  border: 1px solid var(--gold);
-  background: var(--cream);
-  color: var(--wine);
-  letter-spacing: 2px;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 12px;
-  transition: .3s;
-}
-
-.open-button:hover {
-  background: var(--gold);
-  color: white;
-  transform: scale(1.05);
-}
-
-.door-instruction {
-  margin-top: 12px;
-  font-size: 12px;
-  color: var(--pink);
-  letter-spacing: 1px;
-}
-
-/* ANIMACIÓN DE LA PUERTA */
-
-body.door-open .door-left {
-  transform: rotateY(-115deg);
-}
-
-body.door-open .door-right {
-  transform: rotateY(115deg);
-}
-
-body.door-open .door-screen {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* INVITACIÓN */
-
-.invitation {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-
-body.door-open .invitation {
-  opacity: 1;
-}
-
-.top-bar {
-  height: 68px;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 5%;
-  background: var(--wine);
-  color: var(--cream);
-  z-index: 5;
-}
-
-.brand {
-  font-size: 25px;
-  color: var(--gold);
-  letter-spacing: 3px;
-}
-
-.brand span {
-  color: var(--pink);
-}
-
-.navigation {
-  display: flex;
-  gap: 8px;
-}
-
-.nav-button {
-  padding: 9px 13px;
-  color: var(--cream);
-  border: 1px solid transparent;
-  background: transparent;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 12px;
-}
-
-.nav-button:hover,
-.nav-button.active {
-  border-color: var(--gold);
-  color: var(--gold);
-}
-
-/* PÁGINAS */
-
-.slider-window {
-  flex: 1;
-  width: 100%;
-  overflow: hidden;
-  min-height: 0;
-}
-
-.slider-track {
-  display: flex;
-  width: 400%;
-  height: 100%;
-  transform: translateX(0);
-  transition: transform .8s cubic-bezier(.77, 0, .18, 1);
-}
-
-.page {
-  width: 25%;
-  height: 100%;
-  flex-shrink: 0;
-  overflow-y: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 28px 18px;
-  text-align: center;
-  background:
-    radial-gradient(circle at top, white 0, transparent 55%),
-    var(--cream);
-}
-
-.page-content {
-  width: min(100%, 650px);
-  margin: auto;
-  padding: 12px 0;
-}
-
-.eyebrow {
-  color: var(--gold);
-  letter-spacing: 4px;
-  font-size: 11px;
-  margin-bottom: 14px;
-}
-
-.page h2 {
-  font-size: clamp(30px, 5vw, 46px);
-  font-weight: normal;
-  color: var(--wine);
-}
-
-.floral-line {
-  color: var(--gold);
-  font-size: 23px;
-  margin: 15px 0;
-}
-
-.intro-text {
-  max-width: 490px;
-  margin: 18px auto;
-  color: #765765;
-  font-size: 16px;
-  line-height: 1.8;
-}
-
-.couple-name {
-  font-size: clamp(38px, 7vw, 65px);
-  font-weight: normal;
-  color: var(--wine);
-  margin: 20px 0;
-}
-
-.date-text {
-  color: var(--wine-light);
-  letter-spacing: 3px;
-  margin-bottom: 25px;
-}
-
-/* BOTONES */
-
-.primary-button,
-.map-button {
-  display: inline-block;
-  padding: 13px 23px;
-  border: 1px solid var(--gold);
-  background: var(--wine);
-  color: var(--cream);
-  text-decoration: none;
-  font-family: inherit;
-  letter-spacing: 1px;
-  font-size: 11px;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.primary-button:hover,
-.map-button:hover {
-  background: var(--gold);
-  color: var(--wine);
-}
-
-/* FOTO PRINCIPAL */
-
-.photo-frame {
-  width: min(250px, 65vw);
-  height: 190px;
-  margin: 15px auto;
-  padding: 7px;
-  border: 1px solid var(--gold);
-  background: white;
-  box-shadow: 0 8px 22px rgba(75,16,40,.12);
-}
-
-.photo-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* FECHA */
-
-.date-card {
-  width: 210px;
-  margin: 18px auto;
-  padding: 15px;
-  border-top: 1px solid var(--gold);
-  border-bottom: 1px solid var(--gold);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  color: var(--wine);
-  letter-spacing: 3px;
-}
-
-.date-card strong {
-  font-size: 55px;
-  font-weight: normal;
-  color: var(--gold);
-}
-
-.time-text {
-  font-size: 18px;
-  color: var(--wine-light);
-}
-
-/* DETALLES */
-
-.detail-card {
-  max-width: 390px;
-  margin: 15px auto;
-  padding: 16px;
-  background: rgba(255,255,255,.65);
-  border: 1px solid rgba(189,155,112,.55);
-  box-shadow: 0 5px 18px rgba(75,16,40,.06);
-}
-
-.detail-icon {
-  color: var(--gold);
-  font-size: 25px;
-  margin-bottom: 5px;
-}
-
-.detail-card h3 {
-  color: var(--wine);
-  font-size: 19px;
-  font-weight: normal;
-  margin-bottom: 8px;
-}
-
-.detail-card p {
-  color: #765765;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.map-button {
-  margin-top: 12px;
-}
-
-/* LLUVIA DE SOBRES */
-
-.envelope-card {
-  max-width: 380px;
-  margin: 20px auto;
-  padding: 22px;
-  text-align: center;
-  background: #fffaf5;
-  border: 1px solid var(--gold);
-  color: var(--wine);
-  box-shadow: 0 6px 20px rgba(75,16,40,.09);
-}
-
-.envelope-icon {
-  font-size: 32px;
-  color: var(--gold);
-}
-
-.envelope-card h3,
-.envelope-card h4 {
-  font-weight: normal;
-  margin: 8px 0;
-}
-
-.envelope-card h4 {
-  font-size: 22px;
-}
-
-.envelope-card p {
-  font-size: 14px;
-  line-height: 1.7;
-  color: #765765;
-}
-
-.envelope-card span {
-  display: block;
-  margin-top: 14px;
-  color: var(--gold);
-  font-style: italic;
-}
-
-/* CONTADOR */
-
-.countdown-card {
-  margin: 20px auto 5px;
-}
-
-.countdown-card h3 {
-  color: var(--wine);
-  font-size: 19px;
-  font-weight: normal;
-  margin-bottom: 8px;
-}
-
-.countdown {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.countdown div {
-  min-width: 65px;
-  padding: 10px 5px;
-  background: var(--wine);
-  color: var(--cream);
-}
-
-.countdown strong,
-.countdown span {
-  display: block;
-}
-
-.countdown strong {
-  font-size: 23px;
-  color: var(--gold);
-}
-
-.countdown span {
-  font-size: 10px;
-  margin-top: 4px;
-}
-
-/* GALERÍA */
-
-.gallery {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin: 20px auto;
-}
-
-.gallery img {
-  width: min(42%, 210px);
-  height: 190px;
-  object-fit: cover;
-  padding: 6px;
-  border: 1px solid var(--gold);
-  background: white;
-  box-shadow: 0 7px 20px rgba(75,16,40,.12);
-}
-
-.final-message {
-  color: #765765;
-  font-size: 16px;
-  line-height: 1.8;
-  margin: 20px auto;
-}
-
-.signature {
-  font-size: 38px !important;
-}
-
-.heart {
-  color: var(--gold);
-  margin-top: 10px;
-}
-
-/* NAVEGACIÓN INFERIOR */
-
-.slider-controls {
-  height: 55px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 25px;
-  background: var(--wine);
-  color: var(--cream);
-}
-
-.slider-controls button {
-  width: auto;
-  min-width: 105px;
-  height: 35px;
-  padding: 0 14px;
-  border: 1px solid var(--gold);
-  border-radius: 20px;
-  color: var(--cream);
-  background: transparent;
-  font-family: Georgia, serif;
-  font-size: 11px;
-  letter-spacing: 1px;
-  cursor: pointer;
-}
-
-.slider-controls button:hover {
-  background: var(--gold);
-  color: var(--wine);
-}
-
-.slider-controls button:disabled {
-  opacity: .4;
-  cursor: not-allowed;
-}
-
-#pageNumber {
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
-/* RESPONSIVE */
-
-@media (max-width: 600px) {
-  .top-bar {
-    height: auto;
-    min-height: 65px;
-    flex-direction: column;
-    gap: 8px;
-    padding: 9px 5px;
+    });
   }
 
-  .brand {
-    font-size: 21px;
+  /* ==================================
+     CAMBIAR LAS PÁGINAS CON BOTONES
+  ================================== */
+
+  const sliderTrack = document.getElementById("sliderTrack");
+  const prevButton = document.getElementById("prevPage");
+  const nextButton = document.getElementById("nextPage");
+  const pageNumber = document.getElementById("pageNumber");
+  const nextPageButtons = document.querySelectorAll(".next-page");
+
+  let currentPage = 0;
+  const totalPages = 4;
+
+  function showPage(page) {
+
+    if (!sliderTrack || !pageNumber) {
+      return;
+    }
+
+    currentPage = Math.max(0, Math.min(page, totalPages - 1));
+
+    sliderTrack.style.transform =
+      "translateX(-" + (currentPage * 25) + "%)";
+
+    pageNumber.textContent =
+      (currentPage + 1) + " / " + totalPages;
+
+    if (prevButton) {
+      prevButton.disabled = currentPage === 0;
+    }
+
+    if (nextButton) {
+      nextButton.disabled = currentPage === totalPages - 1;
+
+      nextButton.textContent =
+        currentPage === totalPages - 1
+          ? "FINALIZAR"
+          : "SIGUIENTE";
+    }
+
+    /* Regresa al inicio de la página */
+    document.querySelectorAll(".page").forEach(function (pageElement) {
+      pageElement.scrollTop = 0;
+    });
   }
 
-  .navigation {
-    width: 100%;
-    justify-content: center;
-    gap: 1px;
+  if (prevButton) {
+    prevButton.addEventListener("click", function () {
+      showPage(currentPage - 1);
+    });
   }
 
-  .nav-button {
-    padding: 7px 8px;
-    font-size: 10px;
+  if (nextButton) {
+    nextButton.addEventListener("click", function () {
+      showPage(currentPage + 1);
+    });
   }
 
-  .page {
-    padding: 18px 12px;
-    align-items: flex-start;
+  nextPageButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      showPage(currentPage + 1);
+    });
+  });
+
+  showPage(0);
+
+  /* ==================================
+     CUENTA REGRESIVA DE LA BODA
+  ================================== */
+
+  const weddingDate = new Date(
+    "2026-11-14T18:00:00-05:00"
+  ).getTime();
+
+  function updateCountdown() {
+
+    const now = Date.now();
+    const difference = weddingDate - now;
+
+    const daysElement = document.getElementById("days");
+    const hoursElement = document.getElementById("hours");
+    const minutesElement = document.getElementById("minutes");
+    const secondsElement = document.getElementById("seconds");
+
+    if (!daysElement || !hoursElement ||
+        !minutesElement || !secondsElement) {
+      return;
+    }
+
+    if (difference <= 0) {
+      daysElement.textContent = "0";
+      hoursElement.textContent = "0";
+      minutesElement.textContent = "0";
+      secondsElement.textContent = "0";
+      return;
+    }
+
+    const days = Math.floor(
+      difference / (1000 * 60 * 60 * 24)
+    );
+
+    const hours = Math.floor(
+      (difference / (1000 * 60 * 60)) % 24
+    );
+
+    const minutes = Math.floor(
+      (difference / (1000 * 60)) % 60
+    );
+
+    const seconds = Math.floor(
+      (difference / 1000) % 60
+    );
+
+    daysElement.textContent = days;
+    hoursElement.textContent = hours;
+    minutesElement.textContent = minutes;
+    secondsElement.textContent = seconds;
   }
 
-  .intro-text {
-    font-size: 14px;
-    line-height: 1.6;
-  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 
-  .photo-frame {
-    height: 145px;
-  }
-
-  .gallery img {
-    height: 135px;
-  }
-
-  .detail-card {
-    padding: 12px;
-    margin: 10px auto;
-  }
-
-  .envelope-card {
-    padding: 16px;
-    margin: 12px auto;
-  }
-
-  .countdown {
-    gap: 5px;
-  }
-
-  .countdown div {
-    min-width: 55px;
-  }
-
-  .countdown strong {
-    font-size: 19px;
-  }
-
-  .slider-controls {
-    height: 48px;
-    gap: 12px;
-  }
-
-  .slider-controls button {
-    min-width: 90px;
-    font-size: 10px;
-  }
-}
+});
