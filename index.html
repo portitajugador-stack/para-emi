@@ -5,13 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#4b1028">
-  <meta name="description" content="Invitación de boda de María y José.">
+  <meta name="description" content="Invitación a la boda de María y José.">
   <title>María & José | Nuestra boda</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- PORTADA CON PUERTA -->
+  <!-- PORTADA -->
   <div class="door-screen" id="doorScreen">
     <div class="door-decoration">
       <p class="door-small">UNA INVITACIÓN ESPECIAL</p>
@@ -32,18 +32,19 @@
       </div>
 
       <button class="open-button" id="openDoor" type="button">
-        ABRIR INVITACIÓN
-        <span>♥</span>
+        ABRIR INVITACIÓN ♥
       </button>
+
       <p class="door-instruction">Toca para abrir nuestra invitación</p>
     </div>
   </div>
 
-  <!-- INVITACIÓN -->
+  <!-- CONTENIDO -->
   <main class="invitation" id="invitation">
 
     <header class="top-bar">
       <div class="brand">M <span>&</span> J</div>
+
       <nav class="navigation">
         <button class="nav-button active" data-page="0">Inicio</button>
         <button class="nav-button" data-page="1">Nuestra boda</button>
@@ -60,16 +61,20 @@
           <div class="page-content">
             <p class="eyebrow">CON LA BENDICIÓN DE DIOS</p>
             <h2>¡Nos casamos!</h2>
+
             <div class="floral-line">✦ ❀ ✦</div>
+
             <p class="intro-text">
               Hay momentos que se vuelven inolvidables y queremos
               compartir uno de los más especiales de nuestras vidas
               contigo.
             </p>
+
             <h1 class="couple-name">María <span>&</span> José</h1>
             <p class="date-text">14 de noviembre de 2026</p>
+
             <button class="primary-button next-page" type="button">
-              DESCUBRIR INVITACIÓN ♥
+              SIGUIENTE ♥
             </button>
           </div>
         </section>
@@ -79,6 +84,7 @@
           <div class="page-content">
             <p class="eyebrow">UN DÍA PARA RECORDAR</p>
             <h2>Nuestra boda</h2>
+
             <div class="floral-line">✦ ❀ ✦</div>
 
             <div class="photo-frame">
@@ -97,6 +103,10 @@
             </div>
 
             <p class="time-text">A las 6:00 de la tarde</p>
+
+            <button class="primary-button next-page" type="button">
+              SIGUIENTE ♥
+            </button>
           </div>
         </section>
 
@@ -105,6 +115,7 @@
           <div class="page-content">
             <p class="eyebrow">QUEREMOS COMPARTIR CONTIGO</p>
             <h2>Detalles del evento</h2>
+
             <div class="floral-line">✦ ❀ ✦</div>
 
             <div class="detail-card">
@@ -120,23 +131,63 @@
               <p>Carrera 16 #5-31</p>
               <p>Barrio Buenos Aires</p>
               <p>Girardot, Cundinamarca</p>
+
               <a
                 class="map-button"
                 href="https://www.google.com/maps/search/?api=1&query=Carrera+16+%235-31+Barrio+Buenos+Aires+Girardot+Cundinamarca"
                 target="_blank"
                 rel="noopener"
-              >VER UBICACIÓN</a>
+              >
+                VER UBICACIÓN
+              </a>
             </div>
 
+            <!-- LLUVIA DE SOBRES -->
+            <div class="envelope-card">
+              <div class="envelope-icon">✉</div>
+              <h3>Un detalle de amor</h3>
+              <h4>Lluvia de sobres</h4>
+
+              <p>
+                Nuestro mayor regalo es contar con tu compañía
+                en este día tan especial. Si deseas regalarnos
+                un detalle, una lluvia de sobres será recibida
+                con muchísimo cariño.
+              </p>
+
+              <span>María & José ♡</span>
+            </div>
+
+            <!-- CONTADOR -->
             <div class="countdown-card">
               <h3>Falta muy poco para nuestro gran día</h3>
+
               <div class="countdown" id="countdown">
-                <div><strong id="days">--</strong><span>Días</span></div>
-                <div><strong id="hours">--</strong><span>Horas</span></div>
-                <div><strong id="minutes">--</strong><span>Minutos</span></div>
-                <div><strong id="seconds">--</strong><span>Segundos</span></div>
+                <div>
+                  <strong id="days">--</strong>
+                  <span>Días</span>
+                </div>
+
+                <div>
+                  <strong id="hours">--</strong>
+                  <span>Horas</span>
+                </div>
+
+                <div>
+                  <strong id="minutes">--</strong>
+                  <span>Minutos</span>
+                </div>
+
+                <div>
+                  <strong id="seconds">--</strong>
+                  <span>Segundos</span>
+                </div>
               </div>
             </div>
+
+            <button class="primary-button next-page" type="button">
+              SIGUIENTE ♥
+            </button>
           </div>
         </section>
 
@@ -145,6 +196,7 @@
           <div class="page-content">
             <p class="eyebrow">NUESTRA HISTORIA</p>
             <h2>Un recuerdo de amor</h2>
+
             <div class="floral-line">✦ ❀ ✦</div>
 
             <div class="gallery">
@@ -166,10 +218,11 @@
       </div>
     </div>
 
+    <!-- BOTONES DE NAVEGACIÓN -->
     <footer class="slider-controls">
-      <button id="prevPage" type="button" aria-label="Página anterior">❮</button>
+      <button id="prevPage" type="button">ANTERIOR</button>
       <span id="pageNumber">1 / 4</span>
-      <button id="nextPage" type="button" aria-label="Página siguiente">❯</button>
+      <button id="nextPage" type="button">SIGUIENTE</button>
     </footer>
 
   </main>
