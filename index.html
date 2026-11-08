@@ -1,230 +1,179 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#4b1028">
-  <meta name="description" content="Invitación a la boda de María y José">
+  <meta name="description" content="Invitación de boda de María y José.">
   <title>María & José | Nuestra boda</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Italiana&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
 </head>
-
 <body>
-  <div class="ambient"></div>
 
-  <header class="topbar">
-    <span class="brand">M <span>&</span> J</span>
-    <span class="top-date">14 · 11 · 2026</span>
-  </header>
+  <!-- PORTADA CON PUERTA -->
+  <div class="door-screen" id="doorScreen">
+    <div class="door-decoration">
+      <p class="door-small">UNA INVITACIÓN ESPECIAL</p>
+      <h1>María <span>&</span> José</h1>
+      <p class="door-date">14 · 11 · 2026</p>
 
-  <main>
-    <!-- PORTADA Y PUERTA -->
-    <section class="entrance" id="entrance">
       <div class="door-frame">
-        <div class="door-decoration">M <span>&</span> J</div>
-
-        <div class="door door-left"></div>
-        <div class="door door-right"></div>
-
-        <div class="door-content">
-          <p class="eyebrow">TENEMOS UNA INVITACIÓN PARA TI</p>
-          <h1>María <span>&</span> José</h1>
-          <p class="door-subtitle">Nuestra historia continúa...</p>
-          <button id="open-door" class="main-button">
-            ABRIR INVITACIÓN
-          </button>
+        <div class="door">
+          <div class="door-leaf door-left">
+            <div class="door-panel"></div>
+            <div class="door-handle"></div>
+          </div>
+          <div class="door-leaf door-right">
+            <div class="door-panel"></div>
+            <div class="door-handle"></div>
+          </div>
         </div>
       </div>
 
-      <p class="entrance-note">
-        Con amor, queremos compartir este día contigo
-      </p>
-    </section>
+      <button class="open-button" id="openDoor" type="button">
+        ABRIR INVITACIÓN
+        <span>♥</span>
+      </button>
+      <p class="door-instruction">Toca para abrir nuestra invitación</p>
+    </div>
+  </div>
 
-    <!-- INVITACIÓN -->
-    <section class="invitation hidden" id="invitation">
+  <!-- INVITACIÓN -->
+  <main class="invitation" id="invitation">
 
+    <header class="top-bar">
+      <div class="brand">M <span>&</span> J</div>
       <nav class="navigation">
-        <button class="nav-btn active" data-page="0">Bienvenida</button>
-        <button class="nav-btn" data-page="1">Nuestra boda</button>
-        <button class="nav-btn" data-page="2">Detalles</button>
-        <button class="nav-btn" data-page="3">Confirmación</button>
+        <button class="nav-button active" data-page="0">Inicio</button>
+        <button class="nav-button" data-page="1">Nuestra boda</button>
+        <button class="nav-button" data-page="2">Detalles</button>
+        <button class="nav-button" data-page="3">Galería</button>
       </nav>
+    </header>
 
-      <div class="slider-window">
-        <div class="slider-track" id="slider-track">
+    <div class="slider-window">
+      <div class="slider-track" id="sliderTrack">
 
-          <!-- PÁGINA 1 -->
-          <article class="page">
-            <div class="ornament">✧</div>
+        <!-- PÁGINA 1 -->
+        <section class="page home-page">
+          <div class="page-content">
             <p class="eyebrow">CON LA BENDICIÓN DE DIOS</p>
             <h2>¡Nos casamos!</h2>
-            <div class="flourish">❧</div>
-
-            <p class="intro">
-              Hay momentos que se vuelven eternos y personas
-              que hacen que la vida sea maravillosa.
+            <div class="floral-line">✦ ❀ ✦</div>
+            <p class="intro-text">
+              Hay momentos que se vuelven inolvidables y queremos
+              compartir uno de los más especiales de nuestras vidas
+              contigo.
             </p>
+            <h1 class="couple-name">María <span>&</span> José</h1>
+            <p class="date-text">14 de noviembre de 2026</p>
+            <button class="primary-button next-page" type="button">
+              DESCUBRIR INVITACIÓN ♥
+            </button>
+          </div>
+        </section>
 
-            <p class="intro">
-              Queremos celebrar contigo el comienzo de
-              nuestra nueva historia.
-            </p>
-
-            <h3 class="couple">María <span>&</span> José</h3>
-            <p class="date-line">14 de noviembre de 2026</p>
-
-            <button class="main-button next-page">CONTINUAR</button>
-          </article>
-
-          <!-- PÁGINA 2 -->
-          <article class="page">
-            <div class="ornament">✧</div>
+        <!-- PÁGINA 2 -->
+        <section class="page wedding-page">
+          <div class="page-content">
             <p class="eyebrow">UN DÍA PARA RECORDAR</p>
             <h2>Nuestra boda</h2>
+            <div class="floral-line">✦ ❀ ✦</div>
 
-            <p class="intro">
-              Nos llena de alegría invitarte a compartir
-              este momento tan especial de nuestras vidas.
+            <div class="photo-frame">
+              <img src="assets/foto1.jpg" alt="Fotografía de María y José">
+            </div>
+
+            <p class="intro-text">
+              Con mucha alegría queremos invitarte a celebrar
+              el comienzo de esta nueva historia de amor.
             </p>
 
-            <div class="detail-box">
-              <span class="detail-icon">♡</span>
-              <p class="detail-label">FECHA</p>
-              <h3>14 de noviembre</h3>
-              <p>2026</p>
+            <div class="date-card">
+              <span>SÁBADO</span>
+              <strong>14</strong>
+              <span>NOVIEMBRE · 2026</span>
             </div>
 
-            <div class="detail-box">
-              <span class="detail-icon">◷</span>
-              <p class="detail-label">HORA</p>
-              <h3>6:00 de la tarde</h3>
-            </div>
+            <p class="time-text">A las 6:00 de la tarde</p>
+          </div>
+        </section>
 
-            <p class="closing">¡Será un honor contar contigo!</p>
-            <button class="main-button next-page">CONTINUAR</button>
-          </article>
-
-          <!-- PÁGINA 3 -->
-          <article class="page">
-            <div class="ornament">✧</div>
-            <p class="eyebrow">QUEREMOS CELEBRAR CONTIGO</p>
+        <!-- PÁGINA 3 -->
+        <section class="page details-page">
+          <div class="page-content">
+            <p class="eyebrow">QUEREMOS COMPARTIR CONTIGO</p>
             <h2>Detalles del evento</h2>
+            <div class="floral-line">✦ ❀ ✦</div>
 
-            <div class="detail-box location-box">
-              <span class="detail-icon">⌖</span>
-              <p class="detail-label">LUGAR</p>
-              <h3>Carrera 16 #5-31</h3>
+            <div class="detail-card">
+              <div class="detail-icon">♡</div>
+              <h3>La fecha</h3>
+              <p>14 de noviembre de 2026</p>
+              <p>6:00 p. m.</p>
+            </div>
+
+            <div class="detail-card">
+              <div class="detail-icon">⌖</div>
+              <h3>El lugar</h3>
+              <p>Carrera 16 #5-31</p>
               <p>Barrio Buenos Aires</p>
               <p>Girardot, Cundinamarca</p>
+              <a
+                class="map-button"
+                href="https://www.google.com/maps/search/?api=1&query=Carrera+16+%235-31+Barrio+Buenos+Aires+Girardot+Cundinamarca"
+                target="_blank"
+                rel="noopener"
+              >VER UBICACIÓN</a>
             </div>
 
-            <div class="detail-box">
-              <span class="detail-icon">♡</span>
-              <p class="detail-label">CUENTA REGRESIVA</p>
-
-              <div class="countdown">
-                <div>
-                  <strong id="days">00</strong>
-                  <small>DÍAS</small>
-                </div>
-                <div>
-                  <strong id="hours">00</strong>
-                  <small>HORAS</small>
-                </div>
-                <div>
-                  <strong id="minutes">00</strong>
-                  <small>MIN</small>
-                </div>
-                <div>
-                  <strong id="seconds">00</strong>
-                  <small>SEG</small>
-                </div>
+            <div class="countdown-card">
+              <h3>Falta muy poco para nuestro gran día</h3>
+              <div class="countdown" id="countdown">
+                <div><strong id="days">--</strong><span>Días</span></div>
+                <div><strong id="hours">--</strong><span>Horas</span></div>
+                <div><strong id="minutes">--</strong><span>Minutos</span></div>
+                <div><strong id="seconds">--</strong><span>Segundos</span></div>
               </div>
+            </div>
+          </div>
+        </section>
 
-              <p id="countdown-message">¡Te esperamos!</p>
+        <!-- PÁGINA 4 -->
+        <section class="page gallery-page">
+          <div class="page-content">
+            <p class="eyebrow">NUESTRA HISTORIA</p>
+            <h2>Un recuerdo de amor</h2>
+            <div class="floral-line">✦ ❀ ✦</div>
+
+            <div class="gallery">
+              <img src="assets/foto2.jpg" alt="Recuerdo de María y José">
+              <img src="assets/foto3.jpg" alt="Fotografía especial de la pareja">
             </div>
 
-            <button class="main-button" id="map-button">
-              VER UBICACIÓN
-            </button>
-
-            <button class="main-button next-page">CONTINUAR</button>
-          </article>
-
-          <!-- PÁGINA 4 -->
-          <article class="page">
-            <div class="ornament">✧</div>
-            <p class="eyebrow">TU PRESENCIA ES NUESTRO MEJOR REGALO</p>
-            <h2>Confirma tu asistencia</h2>
-
-            <p class="intro">
-              Por favor, ayúdanos confirmando si nos acompañarás.
+            <p class="final-message">
+              Tu presencia hará que este día sea aún más especial.
+              <br>
+              ¡Te esperamos!
             </p>
 
-            <form id="rsvp-form">
-              <label for="nombre">Tu nombre</label>
-              <input
-                id="nombre"
-                name="nombre"
-                type="text"
-                placeholder="Escribe tu nombre"
-                required
-              >
+            <h2 class="signature">María <span>&</span> José</h2>
+            <p class="heart">Con amor, para siempre ♥</p>
+          </div>
+        </section>
 
-              <label for="asistencia">¿Nos acompañarás?</label>
-              <select id="asistencia" name="asistencia" required>
-                <option value="">Selecciona una opción</option>
-                <option value="Sí asistiré">¡Sí, allí estaré!</option>
-                <option value="No podré asistir">No podré asistir</option>
-              </select>
-
-              <label for="invitados">Número de asistentes</label>
-              <select id="invitados" name="invitados" required>
-                <option value="">Selecciona</option>
-                <option value="1">1 persona</option>
-                <option value="2">2 personas</option>
-                <option value="3">3 personas</option>
-                <option value="4">4 personas</option>
-              </select>
-
-              <label for="mensaje">Mensaje (opcional)</label>
-              <textarea
-                id="mensaje"
-                name="mensaje"
-                placeholder="Déjanos un mensaje"
-              ></textarea>
-
-              <button type="submit" class="main-button">
-                ENVIAR CONFIRMACIÓN
-              </button>
-
-              <p id="form-feedback" aria-live="polite"></p>
-            </form>
-          </article>
-
-        </div>
       </div>
+    </div>
 
-      <div class="slider-controls">
-        <button id="prev-page" aria-label="Página anterior">←</button>
-        <span id="page-number">01 / 04</span>
-        <button id="next-page" aria-label="Página siguiente">→</button>
-      </div>
+    <footer class="slider-controls">
+      <button id="prevPage" type="button" aria-label="Página anterior">❮</button>
+      <span id="pageNumber">1 / 4</span>
+      <button id="nextPage" type="button" aria-label="Página siguiente">❯</button>
+    </footer>
 
-      <footer>
-        <p>Con todo nuestro amor</p>
-        <h3>María <span>&</span> José</h3>
-        <small>14 · 11 · 2026</small>
-      </footer>
-
-    </section>
   </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
