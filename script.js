@@ -1,268 +1,159 @@
-document.addEventListener("DOMContentLoaded", () => {
 
-  // ELEMENTOS PRINCIPALES
-  const entrance = document.getElementById("entrance");
-  const doorFrame = document.querySelector(".door-frame");
-  const openDoorButton = document.getElementById("open-door");
-  const invitation = document.getElementById("invitation");
+document.addEventListener("DOMContentLoaded", function () {
 
-  const sliderTrack = document.getElementById("slider-track");
-  const pages = document.querySelectorAll(".page");
-  const navButtons = document.querySelectorAll(".nav-btn");
+  // ELEMENTOS DE LA PUERTA
+  const openDoorButton = document.getElementById("openDoor");
+  const doorScreen = document.getElementById("doorScreen");
 
-  const previousButton = document.getElementById("prev-page");
-  const nextButton = document.getElementById("next-page");
-  const pageNumber = document.getElementById("page-number");
+  // ABRIR PUERTA
+  if (openDoorButton && doorScreen) {
+    openDoorButton.addEventListener("click", function () {
+      document.body.classList.add("door-open");
+
+      openDoorButton.disabled = true;
+      openDoorButton.textContent = "BIENVENIDOS ♥";
+
+      // Al terminar la animación, retirar la portada
+      setTimeout(function () {
+        doorScreen.style.display = "none";
+      }, 1800);
+    });
+  }
+
+  // CONTROL DE PÁGINAS
+  const sliderTrack = document.getElementById("sliderTrack");
+  const prevButton = document.getElementById("prevPage");
+  const nextButton = document.getElementById("nextPage");
+  const pageNumber = document.getElementById("pageNumber");
+  const navButtons = document.querySelectorAll(".nav-button");
+  const nextPageButtons = document.querySelectorAll(".next-page");
 
   let currentPage = 0;
-  const totalPages = pages.length;
+  const totalPages = 4;
 
-  // ABRIR LA PUERTA
-  openDoorButton.addEventListener("click", () => {
+  function showPage(page) {
+    currentPage = Math.max(0, Math.min(page, totalPages - 1));
 
-    doorFrame.classList.add("open");
-
-    openDoorButton.disabled = true;
-
-    setTimeout(() => {
-      entrance.classList.add("hidden");
-      invitation.classList.remove("hidden");
-
-      showPage(0);
-
-    }, 1700);
-
-  });
-
-  // MOSTRAR PÁGINA
-  function showPage(index) {
-
-    if (index < 0 || index >= totalPages) {
-      return;
+    if (sliderTrack) {
+      sliderTrack.style.transform =
+        "translateX(-" + (currentPage * 25) + "%)";
     }
 
-    currentPage = index;
+    if (pageNumber) {
+      pageNumber.textContent = (currentPage + 1) + " / " + totalPages;
+    }
 
-    sliderTrack.style.transform =
-      `translateX(-${currentPage * 100}%)`;
-
-    // Actualizar navegación
-    navButtons.forEach((button, position) => {
-
-      button.classList.toggle(
-        "active",
-        position === currentPage
-      );
-
+    navButtons.forEach(function (button) {
+      const buttonPage = Number(button.dataset.page);
+      button.classList.toggle("active", buttonPage === currentPage);
     });
-
-    // Actualizar número de página
-    pageNumber.textContent =
-      `${String(currentPage + 1).padStart(2, "0")} / ${String(totalPages).padStart(2, "0")}`;
-
-    // Actualizar botones
-    previousButton.disabled = currentPage === 0;
-    nextButton.disabled = currentPage === totalPages - 1;
-
-    previousButton.style.opacity =
-      currentPage === 0 ? ".4" : "1";
-
-    nextButton.style.opacity =
-      currentPage === totalPages - 1 ? ".4" : "1";
   }
 
-  // BOTÓN ANTERIOR
-  previousButton.addEventListener("click", () => {
-    showPage(currentPage - 1);
-  });
-
-  // BOTÓN SIGUIENTE
-  nextButton.addEventListener("click", () => {
-    showPage(currentPage + 1);
-  });
-
-  // BOTONES DE NAVEGACIÓN
-  navButtons.forEach((button) => {
-
-    button.addEventListener("click", () => {
-
-      const page = Number(button.dataset.page);
-
-      showPage(page);
-
+  if (prevButton) {
+    prevButton.addEventListener("click", function () {
+      showPage(currentPage - 1);
     });
+  }
 
-  });
-
-  // BOTONES CONTINUAR
-  document.querySelectorAll(".next-page").forEach((button) => {
-
-    button.addEventListener("click", () => {
+  if (nextButton) {
+    nextButton.addEventListener("click", function () {
       showPage(currentPage + 1);
     });
+  }
 
+  navButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      showPage(Number(button.dataset.page));
+    });
   });
 
-  // DESLIZAR CON EL DEDO EN CELULARES
-  let touchStartX = 0;
-  let touchEndX = 0;
+  nextPageButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      showPage(currentPage + 1);
+    });
+  });
 
+  showPage(0);
+
+  // DESLIZAR CON EL DEDO O EL RATÓN
   const sliderWindow = document.querySelector(".slider-window");
+  let startX = 0;
+  let endX = 0;
 
-  sliderWindow.addEventListener("touchstart", (event) => {
+  if (sliderWindow) {
+    sliderWindow.addEventListener("touchstart", function (event) {
+      startX = event.changedTouches[0].screenX;
+    }, { passive: true });
 
-    touchStartX = event.changedTouches[0].screenX;
+    sliderWindow.addEventListener("touchend", function (event) {
+      endX = event.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
 
-  }, { passive: true });
+    sliderWindow.addEventListener("mousedown", function (event) {
+      startX = event.screenX;
+    });
 
-  sliderWindow.addEventListener("touchend", (event) => {
-
-    touchEndX = event.changedTouches[0].screenX;
-
-    handleSwipe();
-
-  }, { passive: true });
+    sliderWindow.addEventListener("mouseup", function (event) {
+      endX = event.screenX;
+      handleSwipe();
+    });
+  }
 
   function handleSwipe() {
+    const distance = endX - startX;
 
-    const difference = touchStartX - touchEndX;
-
-    if (Math.abs(difference) < 50) {
-      return;
+    if (Math.abs(distance) > 60) {
+      if (distance < 0) {
+        showPage(currentPage + 1);
+      } else {
+        showPage(currentPage - 1);
+      }
     }
-
-    if (difference > 0) {
-      showPage(currentPage + 1);
-    } else {
-      showPage(currentPage - 1);
-    }
-
   }
 
-  // UBICACIÓN EN GOOGLE MAPS
-  const mapButton = document.getElementById("map-button");
-
-  mapButton.addEventListener("click", () => {
-
-    const address =
-      "Carrera 16 #5-31, Barrio Buenos Aires, Girardot, Cundinamarca, Colombia";
-
-    const mapUrl =
-      "https://www.google.com/maps/search/?api=1&query=" +
-      encodeURIComponent(address);
-
-    window.open(mapUrl, "_blank", "noopener,noreferrer");
-
-  });
-
-  // CUENTA REGRESIVA
-  // Fecha y hora de Colombia: 14 de noviembre de 2026, 6:00 p. m.
-  const weddingDate = new Date("2026-11-14T18:00:00-05:00");
-
-  const daysElement = document.getElementById("days");
-  const hoursElement = document.getElementById("hours");
-  const minutesElement = document.getElementById("minutes");
-  const secondsElement = document.getElementById("seconds");
-  const countdownMessage = document.getElementById("countdown-message");
+  // CONTADOR REGRESIVO
+  const weddingDate = new Date("2026-11-14T18:00:00-05:00").getTime();
 
   function updateCountdown() {
+    const now = Date.now();
+    const difference = weddingDate - now;
 
-    const now = new Date();
-    const difference = weddingDate.getTime() - now.getTime();
+    const days = document.getElementById("days");
+    const hours = document.getElementById("hours");
+    const minutes = document.getElementById("minutes");
+    const seconds = document.getElementById("seconds");
+
+    if (!days || !hours || !minutes || !seconds) return;
 
     if (difference <= 0) {
-
-      daysElement.textContent = "00";
-      hoursElement.textContent = "00";
-      minutesElement.textContent = "00";
-      secondsElement.textContent = "00";
-
-      countdownMessage.textContent =
-        "¡Hoy celebramos nuestro amor!";
-
+      days.textContent = "0";
+      hours.textContent = "0";
+      minutes.textContent = "0";
+      seconds.textContent = "0";
       return;
     }
 
-    const days = Math.floor(
-      difference / (1000 * 60 * 60 * 24)
-    );
-
-    const hours = Math.floor(
+    days.textContent = Math.floor(difference / (1000 * 60 * 60 * 24));
+    hours.textContent = Math.floor(
       (difference / (1000 * 60 * 60)) % 24
     );
-
-    const minutes = Math.floor(
+    minutes.textContent = Math.floor(
       (difference / (1000 * 60)) % 60
     );
-
-    const seconds = Math.floor(
+    seconds.textContent = Math.floor(
       (difference / 1000) % 60
     );
-
-    daysElement.textContent = String(days).padStart(2, "0");
-    hoursElement.textContent = String(hours).padStart(2, "0");
-    minutesElement.textContent = String(minutes).padStart(2, "0");
-    secondsElement.textContent = String(seconds).padStart(2, "0");
-
-    countdownMessage.textContent = "¡Te esperamos!";
   }
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // CONFIRMACIÓN DE ASISTENCIA
-  const rsvpForm = document.getElementById("rsvp-form");
-  const feedback = document.getElementById("form-feedback");
-
-  rsvpForm.addEventListener("submit", (event) => {
-
-    event.preventDefault();
-
-    const nombre =
-      document.getElementById("nombre").value.trim();
-
-    const asistencia =
-      document.getElementById("asistencia").value;
-
-    const invitados =
-      document.getElementById("invitados").value;
-
-    const mensaje =
-      document.getElementById("mensaje").value.trim();
-
-    if (!nombre || !asistencia || !invitados) {
-
-      feedback.textContent =
-        "Por favor, completa todos los campos obligatorios.";
-
-      return;
-    }
-
-    const confirmationMessage =
-      `Hola, quiero confirmar mi asistencia a la boda de María y José.\n\n` +
-      `Nombre: ${nombre}\n` +
-      `Asistencia: ${asistencia}\n` +
-      `Número de asistentes: ${invitados}\n` +
-      `Mensaje: ${mensaje || "Sin mensaje"}\n\n` +
-      `Fecha: 14 de noviembre de 2026\n` +
-      `Hora: 6:00 p. m.`;
-
-    const whatsappUrl =
-      "https://wa.me/?text=" +
-      encodeURIComponent(confirmationMessage);
-
-    feedback.textContent =
-      "Se abrirá WhatsApp para que puedas enviar tu confirmación.";
-
-    window.open(
-      whatsappUrl,
-      "_blank",
-      "noopener,noreferrer"
-    );
-
+  // OCULTAR ESPACIOS DE FOTOS SI NO SE HAN SUBIDO
+  document.querySelectorAll("img").forEach(function (image) {
+    image.addEventListener("error", function () {
+      image.style.display = "none";
+    });
   });
-
-  // ESTADO INICIAL
-  showPage(0);
 
 });
