@@ -1,4 +1,3 @@
-
 :root {
   --wine: #4b1028;
   --wine-light: #702d45;
@@ -16,171 +15,165 @@
 
 html, body {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
 }
 
 body {
   font-family: Georgia, "Times New Roman", serif;
   color: var(--text);
   background: var(--cream);
+  overflow: hidden;
 }
 
-/* PUERTA DE ENTRADA */
-
+/* PUERTAS DE ENTRADA */
 .door-screen {
   position: fixed;
   inset: 0;
   z-index: 1000;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 25px;
+  padding: 20px;
   background:
-    radial-gradient(circle, rgba(255,255,255,.10), transparent 65%),
-    var(--wine);
-  transition: opacity 1s ease, visibility 1s ease;
+    radial-gradient(circle at center, #fff8ef 0%, #e8c9c9 100%);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 1s ease, visibility 0s linear 1.8s;
 }
 
-.door-decoration {
-  width: min(92%, 650px);
+.door-heading {
   text-align: center;
-  color: var(--cream);
+  color: var(--wine);
+  z-index: 2;
 }
 
-.door-small {
-  color: var(--gold);
-  letter-spacing: 5px;
+.door-heading p:first-child {
+  letter-spacing: 4px;
   font-size: 11px;
-  margin-bottom: 12px;
 }
 
-.door-decoration h1 {
-  font-size: clamp(38px, 8vw, 66px);
+.door-heading h1 {
+  font-size: clamp(35px, 7vw, 58px);
   font-weight: normal;
-  margin-bottom: 8px;
+  margin: 10px 0;
 }
 
-.door-decoration h1 span,
-.couple-name span,
-.signature span {
+.door-heading h1 span {
   color: var(--gold);
   font-style: italic;
 }
 
-.door-date {
-  color: var(--pink);
-  letter-spacing: 4px;
-  font-size: 13px;
-  margin-bottom: 24px;
+.door-heading p:last-child {
+  letter-spacing: 3px;
+  font-size: 10px;
 }
 
 .door-frame {
-  width: min(300px, 75vw);
-  height: min(390px, 47vh);
-  min-height: 260px;
-  margin: 0 auto;
-  padding: 10px;
-  border: 3px solid var(--gold);
-  border-radius: 150px 150px 0 0;
-  background: #28101b;
+  position: relative;
+  display: flex;
+  width: min(88vw, 440px);
+  height: min(48vh, 390px);
+  min-height: 240px;
   perspective: 1200px;
+  border: 9px solid var(--gold);
+  background: var(--wine);
+  box-shadow: 0 15px 40px rgba(75, 16, 40, .25);
 }
 
 .door {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: flex;
-  overflow: hidden;
-  border: 2px solid var(--gold);
-  border-radius: 140px 140px 0 0;
-  background: #28101b;
-}
-
-.door-leaf {
   position: relative;
   width: 50%;
   height: 100%;
-  background: linear-gradient(90deg, #35101f, #692c43);
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.08), transparent 35%, rgba(0,0,0,.12)),
+    var(--wine);
   border: 3px solid #bd9b70;
-  transition: transform 1.7s cubic-bezier(.7, 0, .2, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
   transform-style: preserve-3d;
+  transition: transform 1.7s cubic-bezier(.65, 0, .25, 1);
 }
 
 .door-left {
   transform-origin: left center;
-  border-right: 1px solid var(--gold);
+  border-right: 2px solid var(--gold);
 }
 
 .door-right {
   transform-origin: right center;
-  border-left: 1px solid var(--gold);
+  border-left: 2px solid var(--gold);
 }
 
-.door-panel {
-  position: absolute;
-  inset: 12px 9px;
+.door-decoration {
+  width: 75%;
+  height: 78%;
   border: 2px solid rgba(189,155,112,.8);
-  border-radius: 110px 110px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream);
+  font-size: clamp(38px, 8vw, 65px);
+  font-style: italic;
+  box-shadow: inset 0 0 20px rgba(0,0,0,.12);
 }
 
-.door-panel::after {
-  content: "";
+.door-decoration span {
+  color: var(--gold);
+  font-size: 23px;
+  margin-top: 10px;
+}
+
+.door-center-heart {
   position: absolute;
-  inset: 35% 8px 8px;
-  border: 2px solid rgba(189,155,112,.6);
-}
-
-.door-handle {
-  position: absolute;
-  top: 55%;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--gold);
-  box-shadow: 0 0 10px var(--gold);
-}
-
-.door-left .door-handle {
-  right: 12px;
-}
-
-.door-right .door-handle {
-  left: 12px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  color: var(--gold);
+  font-size: 28px;
+  pointer-events: none;
 }
 
 .open-button {
-  margin-top: 25px;
-  padding: 14px 30px;
   border: 1px solid var(--gold);
-  background: var(--cream);
-  color: var(--wine);
+  background: var(--wine);
+  color: white;
+  padding: 15px 28px;
   letter-spacing: 2px;
-  cursor: pointer;
   font-family: inherit;
   font-size: 12px;
-  transition: .3s;
+  cursor: pointer;
+  transition: background .3s, transform .3s;
+  z-index: 4;
 }
 
 .open-button:hover {
-  background: var(--gold);
-  color: white;
-  transform: scale(1.05);
+  background: var(--wine-light);
+  transform: translateY(-3px);
+}
+
+.open-button:disabled {
+  cursor: default;
+  opacity: .8;
 }
 
 .open-button span {
-  margin-left: 8px;
+  color: var(--gold);
 }
 
-.door-instruction {
-  margin-top: 12px;
+.door-date {
+  color: var(--wine);
   font-size: 12px;
-  color: var(--pink);
-  letter-spacing: 1px;
+  letter-spacing: 4px;
 }
 
 /* ANIMACIÓN AL ABRIR */
-
 body.door-open .door-left {
   transform: rotateY(-115deg);
 }
@@ -196,76 +189,59 @@ body.door-open .door-screen {
 }
 
 /* INVITACIÓN */
-
 .invitation {
   width: 100%;
   height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   opacity: 0;
   transition: opacity 1s ease;
+  background:
+    radial-gradient(circle at top, #fffaf4, var(--cream));
 }
 
 body.door-open .invitation {
   opacity: 1;
 }
 
-.top-bar {
-  height: 68px;
+.top-header {
   flex-shrink: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 5%;
-  background: var(--wine);
-  color: var(--cream);
-  z-index: 5;
+  text-align: center;
+  padding: 14px 12px 12px;
+  background: rgba(255,255,255,.5);
+  border-bottom: 1px solid rgba(189,155,112,.4);
 }
 
-.brand {
-  font-size: 25px;
-  color: var(--gold);
+.small-label,
+.header-date {
+  font-size: 9px;
   letter-spacing: 3px;
 }
 
-.brand span {
-  color: var(--pink);
+.top-header h1 {
+  font-size: clamp(25px, 5vw, 37px);
+  font-weight: normal;
+  margin: 4px 0;
 }
 
-.navigation {
-  display: flex;
-  gap: 8px;
-}
-
-.nav-button {
-  padding: 9px 13px;
-  color: var(--cream);
-  border: 1px solid transparent;
-  background: transparent;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 12px;
-}
-
-.nav-button:hover,
-.nav-button.active {
-  border-color: var(--gold);
+.top-header h1 span {
   color: var(--gold);
+  font-style: italic;
 }
 
 .slider-window {
   flex: 1;
   width: 100%;
-  overflow: hidden;
   min-height: 0;
+  overflow: hidden;
 }
 
 .slider-track {
   display: flex;
   width: 400%;
   height: 100%;
-  transform: translateX(0);
-  transition: transform .8s cubic-bezier(.77, 0, .18, 1);
+  transition: transform .75s cubic-bezier(.65, 0, .25, 1);
 }
 
 .page {
@@ -273,338 +249,361 @@ body.door-open .invitation {
   height: 100%;
   flex-shrink: 0;
   overflow-y: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 28px 18px;
+  padding: 24px 16px 30px;
   text-align: center;
-  background:
-    radial-gradient(circle at top, white 0, transparent 55%),
-    var(--cream);
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) transparent;
 }
 
 .page-content {
-  width: min(100%, 650px);
-  margin: auto;
-  padding: 12px 0;
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
 }
 
 .eyebrow {
+  font-size: 10px;
+  letter-spacing: 3px;
   color: var(--gold);
-  letter-spacing: 4px;
-  font-size: 11px;
-  margin-bottom: 14px;
+  margin: 10px 0;
 }
 
 .page h2 {
-  font-size: clamp(30px, 5vw, 46px);
+  font-size: clamp(29px, 5vw, 43px);
   font-weight: normal;
   color: var(--wine);
+  margin: 8px 0;
 }
 
-.floral-line {
+.ornament {
   color: var(--gold);
-  font-size: 23px;
-  margin: 15px 0;
+  font-size: 30px;
+  margin: 8px 0 15px;
 }
 
 .intro-text {
-  max-width: 490px;
-  margin: 18px auto;
-  color: #765765;
-  font-size: 16px;
+  max-width: 470px;
+  margin: 15px auto;
+  font-size: 15px;
   line-height: 1.8;
-}
-
-.couple-name {
-  font-size: clamp(38px, 7vw, 65px);
-  font-weight: normal;
-  color: var(--wine);
-  margin: 20px 0;
-}
-
-.date-text {
-  color: var(--wine-light);
-  letter-spacing: 3px;
-  margin-bottom: 25px;
-}
-
-.primary-button,
-.map-button {
-  display: inline-block;
-  padding: 13px 23px;
-  border: 1px solid var(--gold);
-  background: var(--wine);
-  color: var(--cream);
-  text-decoration: none;
-  font-family: inherit;
-  letter-spacing: 1px;
-  font-size: 11px;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.primary-button:hover,
-.map-button:hover {
-  background: var(--gold);
-  color: var(--wine);
+  color: #765765;
 }
 
 .photo-frame {
-  width: min(250px, 65vw);
-  height: 190px;
-  margin: 15px auto;
   padding: 7px;
   border: 1px solid var(--gold);
   background: white;
   box-shadow: 0 8px 22px rgba(75,16,40,.12);
+  margin: 18px auto;
+  max-width: 380px;
 }
 
 .photo-frame img {
+  display: block;
   width: 100%;
   height: 100%;
+  min-height: 180px;
+  max-height: 370px;
   object-fit: cover;
 }
 
+.main-photo {
+  max-width: 330px;
+}
+
+.main-photo img {
+  height: 290px;
+}
+
+.second-photo {
+  max-width: 330px;
+}
+
+.second-photo img {
+  height: 250px;
+}
+
+.couple-names {
+  font-size: 30px;
+  font-weight: normal;
+  color: var(--wine);
+  margin: 15px 0 5px;
+}
+
+.date-line {
+  color: var(--gold);
+  letter-spacing: 2px;
+  font-size: 12px;
+  margin: 8px 0 18px;
+}
+
+.button-gold {
+  margin: 20px auto 10px;
+  display: inline-block;
+  border: 1px solid var(--gold);
+  padding: 12px 24px;
+  background: var(--wine);
+  color: white;
+  letter-spacing: 1.5px;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.button-gold:hover {
+  background: var(--wine-light);
+}
+
+/* FECHA */
 .date-card {
-  width: 210px;
-  margin: 18px auto;
-  padding: 15px;
+  width: min(260px, 90%);
+  margin: 22px auto;
+  padding: 18px;
   border-top: 1px solid var(--gold);
   border-bottom: 1px solid var(--gold);
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
   color: var(--wine);
-  letter-spacing: 3px;
 }
 
 .date-card strong {
-  font-size: 55px;
+  font-size: 65px;
   font-weight: normal;
-  color: var(--gold);
+  line-height: 1;
 }
 
-.time-text {
-  font-size: 18px;
-  color: var(--wine-light);
+.date-card span {
+  font-size: 10px;
+  letter-spacing: 3px;
 }
 
 /* DETALLES */
-
-.detail-card {
-  max-width: 390px;
-  margin: 15px auto;
-  padding: 16px;
-  background: rgba(255,255,255,.65);
-  border: 1px solid rgba(189,155,112,.55);
-  box-shadow: 0 5px 18px rgba(75,16,40,.06);
+.detail-item {
+  margin: 20px auto;
+  max-width: 400px;
+  padding: 14px;
+  border-bottom: 1px solid rgba(189,155,112,.4);
 }
 
 .detail-icon {
-  color: var(--gold);
   font-size: 25px;
+  color: var(--gold);
   margin-bottom: 5px;
 }
 
-.detail-card h3,
-.countdown-card h3 {
-  color: var(--wine);
-  font-size: 19px;
+.detail-item h3 {
+  font-size: 21px;
   font-weight: normal;
   margin-bottom: 8px;
 }
 
-.detail-card p {
+.detail-item p {
   color: #765765;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
-.map-button {
+.map-link {
+  display: inline-block;
   margin-top: 12px;
+  padding: 10px 16px;
+  border: 1px solid var(--gold);
+  color: var(--wine);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-decoration: none;
 }
 
-.countdown-card {
-  margin: 20px auto 5px;
+/* LLUVIA DE SOBRES */
+.envelope-card {
+  max-width: 380px;
+  margin: 24px auto;
+  padding: 22px;
+  text-align: center;
+  background: #fffaf5;
+  border: 1px solid var(--gold);
+  color: var(--wine);
+  box-shadow: 0 6px 20px rgba(75,16,40,.09);
+}
+
+.envelope-icon {
+  font-size: 32px;
+  color: var(--gold);
+}
+
+.envelope-card h3,
+.envelope-card h4 {
+  font-weight: normal;
+  margin: 8px 0;
+}
+
+.envelope-card h4 {
+  font-size: 22px;
+}
+
+.envelope-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #765765;
+}
+
+.envelope-card span {
+  display: block;
+  margin-top: 14px;
+  color: var(--gold);
+  font-style: italic;
+}
+
+/* CUENTA REGRESIVA */
+.countdown-box {
+  margin: 25px auto;
+  padding: 20px 10px;
+  max-width: 450px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(189,155,112,.5);
+}
+
+.countdown-box h3 {
+  font-size: 17px;
+  font-weight: normal;
+  margin-bottom: 16px;
 }
 
 .countdown {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 12px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .countdown div {
   min-width: 65px;
-  padding: 10px 5px;
-  background: var(--wine);
-  color: var(--cream);
-}
-
-.countdown strong,
-.countdown span {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .countdown strong {
-  font-size: 23px;
-  color: var(--gold);
+  font-size: 25px;
+  font-weight: normal;
+  color: var(--wine);
 }
 
 .countdown span {
-  font-size: 10px;
-  margin-top: 4px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--gold);
 }
 
 /* GALERÍA */
-
 .gallery {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 500px;
   margin: 20px auto;
+}
+
+.gallery .photo-frame {
+  width: 100%;
+  margin: 0;
+}
+
+.gallery .photo-frame:last-child {
+  grid-column: 1 / -1;
+  width: 70%;
 }
 
 .gallery img {
-  width: min(42%, 210px);
-  height: 190px;
-  object-fit: cover;
-  padding: 6px;
-  border: 1px solid var(--gold);
-  background: white;
-  box-shadow: 0 7px 20px rgba(75,16,40,.12);
+  min-height: 150px;
+  height: 200px;
 }
 
 .final-message {
-  color: #765765;
-  font-size: 16px;
+  max-width: 450px;
+  margin: 25px auto;
   line-height: 1.8;
-  margin: 20px auto;
-}
-
-.signature {
-  font-size: 38px !important;
-}
-
-.heart {
-  color: var(--gold);
-  margin-top: 10px;
+  font-size: 16px;
+  color: #765765;
 }
 
 /* CONTROLES */
-
 .slider-controls {
-  height: 55px;
   flex-shrink: 0;
+  min-height: 58px;
+  padding: 8px 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 25px;
-  background: var(--wine);
-  color: var(--cream);
+  border-top: 1px solid rgba(189,155,112,.4);
+  background: rgba(255,255,255,.6);
 }
 
 .slider-controls button {
-  width: 32px;
-  height: 32px;
+  background: var(--wine);
+  color: white;
   border: 1px solid var(--gold);
-  border-radius: 50%;
-  color: var(--gold);
-  background: transparent;
+  padding: 10px 17px;
+  font-family: inherit;
+  font-size: 10px;
+  letter-spacing: 1px;
   cursor: pointer;
 }
 
-.slider-controls button:hover {
-  background: var(--gold);
-  color: var(--wine);
+.slider-controls button:disabled {
+  opacity: .35;
+  cursor: not-allowed;
 }
 
 #pageNumber {
+  color: var(--wine);
   font-size: 12px;
   letter-spacing: 2px;
 }
 
-/* CELULARES */
+.footer-love {
+  flex-shrink: 0;
+  padding: 7px;
+  text-align: center;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
 
-@media (max-width: 600px) {
-  .top-bar {
-    height: auto;
-    min-height: 65px;
-    flex-direction: column;
-    gap: 8px;
-    padding: 9px 5px;
-  }
-
-  .brand {
-    font-size: 21px;
-  }
-
-  .navigation {
-    width: 100%;
-    justify-content: center;
-    gap: 1px;
-  }
-
-  .nav-button {
-    padding: 7px 8px;
-    font-size: 10px;
+/* PANTALLAS PEQUEÑAS */
+@media (max-width: 480px) {
+  .top-header {
+    padding: 10px;
   }
 
   .page {
-    padding: 18px 12px;
+    padding: 18px 13px 25px;
   }
 
-  .intro-text {
-    font-size: 14px;
-    line-height: 1.6;
+  .main-photo img {
+    height: 230px;
   }
 
-  .photo-frame {
-    height: 145px;
-  }
-
-  .gallery img {
-    height: 135px;
-  }
-
-  .detail-card {
-    padding: 12px;
-    margin: 10px auto;
-  }
-
-  .countdown {
-    gap: 5px;
-  }
-
-  .countdown div {
-    min-width: 55px;
-  }
-
-  .countdown strong {
-    font-size: 19px;
+  .second-photo img {
+    height: 210px;
   }
 
   .slider-controls {
-    height: 48px;
-  }
-}
-
-@media (max-height: 650px) {
-  .page {
-    align-items: flex-start;
+    gap: 12px;
   }
 
-  .page-content {
-    padding-top: 8px;
+  .slider-controls button {
+    padding: 10px 12px;
+    font-size: 9px;
   }
 
-  .photo-frame {
-    height: 120px;
+  .countdown {
+    gap: 8px;
   }
 
-  .gallery img {
-    height: 120px;
+  .countdown div {
+    min-width: 58px;
   }
 }
